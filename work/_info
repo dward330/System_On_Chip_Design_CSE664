@@ -8,27 +8,71 @@ z2
 !i10f 100
 cModel Technology
 dC:/intelFPGA/17.1
-vnbit_two_one_mux
-Z0 !s110 1685299907
+vALU_8bit
+Z0 !s110 1685504523
 !i10b 1
-!s100 DklIklmn09JBn<F4AF6LI0
-IJHVaF^5BJ^`n1?>3RcHe50
+!s100 >bB1i^WLiPHbnE>b?h<9:2
+IaP4j[f:WV<XW8o>5K:P]00
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664
-w1685299563
-8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v
-FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v
-L0 44
+w1685503836
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit.v
+L0 4
 Z3 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1685299907.000000
-!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v|
+Z4 !s108 1685504523.000000
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit.v|
 !i113 1
 Z5 o-work work
 Z6 tCvgOpt 0
+n@a@l@u_8bit
+vALU_8bit_tb
+R0
+!i10b 1
+!s100 >]ULUmTT:oY7N0zJFA6Di1
+IZ`_N`9[8^Kfa2UYF[9h[U3
+R1
+R2
+w1685504449
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit_tb.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit_tb.v
+L0 4
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/ALU_8bit_tb.v|
+!i113 1
+R5
+R6
+n@a@l@u_8bit_tb
+vnbit_two_one_mux
+R0
+!i10b 1
+!s100 DklIklmn09JBn<F4AF6LI0
+IJHVaF^5BJ^`n1?>3RcHe50
+R1
+R2
+Z7 w1685417847
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v
+L0 44
+R3
+r1
+!s85 0
+31
+R4
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux.v|
+!i113 1
+R5
+R6
 vnbit_two_one_mux_tb
 R0
 !i10b 1
@@ -36,7 +80,7 @@ R0
 IeTTH>:c_NGeHiX^9I]WR`3
 R1
 R2
-w1685299595
+R7
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux_tb.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664/nbit_two_one_mux_tb.v
 L0 6
