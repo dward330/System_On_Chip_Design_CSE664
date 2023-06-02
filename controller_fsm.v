@@ -49,43 +49,113 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
         end
         
         REG_TO_ACC : begin
-        // TODO:
+		LoadIR  <= 1'b1; // TODO?         	
+		IncPC   <= 1'b1; 
+		SelPC   <= 1'bx;
+		LoadPC  <= 1'b0;
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b1;
+		SelAcc  <= 2'b01; // SecAcc0 = 1 (B), SelAcc1 = 0 (A)
+		SelALU  <= Opcode;
         end
         
         ACC_TO_REG : begin
-        // TODO:
+		LoadIR  <= 1'b1;     // TODO?      	
+		IncPC   <= 1'b1; 
+		SelPC   <= 1'bx;
+		LoadPC  <= 1'b0;
+		LoadReg <= 1'b1;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= ACC_TO_REG;
         end
         
         IMM_TO_ACC : begin
-        // TODO:
+		LoadIR  <= 1'b1;   // TODO?        	
+		IncPC   <= 1'b1; 
+		SelPC   <= 1'b0;
+		LoadPC  <= 1'b0;
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b1;
+		SelAcc  <= 2'b00; // SecAcc0 = 0 (A), SelAcc1 = 0 (A)
+		SelALU  <= IMM_TO_ACC;
         end      
         
         JMPZ_REG : begin
-        // TODO:
+		LoadIR  <= 1'b1;    // TODO?       	
+		IncPC   <= 1'b0; 
+		SelPC   <= 1'b0; // Load address to jump to from register
+		LoadPC  <= 1'b1; // Load value from register instead of basic increment
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= JMPZ_REG;
         end
         
         JMPZ_IMM : begin
-        // TODO:
+		LoadIR  <= 1'b1;    // TODO?       	
+		IncPC   <= 1'b0; 
+		SelPC   <= 1'b1; // Load immediate to jump to
+		LoadPC  <= 1'b1; // Load immediate value instead of basic increment
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= JMPZ_IMM;
         end
         
         JMPC_REG : begin
-        // TODO:
+		LoadIR  <= 1'b1;    // TODO?       	
+		IncPC   <= 1'b0; 
+		SelPC   <= 1'b0; // Load value from register instead of basic increment
+		LoadPC  <= 1'b1;	
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= JMPC_REG;
         end
            
         JMPC_IMM : begin
-        // TODO:
+		LoadIR  <= 1'b1;     // TODO?      	
+		IncPC   <= 1'b0; 
+		SelPC   <= 1'b1;	// Load immediate to jump to
+		LoadPC  <= 1'b1;	// Load immediate value instead of basic increment
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= JMPC_IMM;       
         end
         
         NOP : begin
-        // TODO:
+		LoadIR  <= 1'b1; // TODO?    
+		IncPC   <= 1'b1;  
+		SelPC   <= 1'bx;
+		LoadPC  <= 1'b1;
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= NOP; 
         end
         
         HALT : begin
-        // TODO:
+        	LoadIR  <= 1'b0; // TODO?
+		IncPC   <= 1'b0;  
+		SelPC   <= 1'bx;
+		LoadPC  <= 1'b0;
+		LoadReg <= 1'b0;
+		LoadAcc <= 1'b0;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= HALT; 
         end
         
         default : begin
-        // TODO:
+        	LoadIR  <= 1'bx;       	
+		IncPC   <= 1'bx; 
+		SelPC   <= 1'bx;
+		LoadPC  <= 1'bx;
+		LoadReg <= 1'bx;
+		LoadAcc <= 1'bx;
+		SelAcc  <= 2'bxx; 
+		SelALU  <= 4'bxxxx; 
         end
         
         endcase
