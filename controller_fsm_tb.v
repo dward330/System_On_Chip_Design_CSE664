@@ -16,7 +16,7 @@
 ** g_ = generic
 ** c_ = constant
 ** s_ = state
-** i_ = input
+** i_ = input 
 ** o_ = output
 ** Suffixes
 ** _count = Counter
@@ -27,16 +27,19 @@
 ********************************************************************************
 ** VERSION HISTORY
 **
-**    Rev         Author              Date
+**    Rev         Author              		Date
 ** -----------------------------------------------------------------------------
+**    1.1         N. Lyons, A. Benedetti        6-4-2023
+**                Fixed default nets
 **
-**    1.0         N. Lyons            23-May-2023
+**    1.0         N. Lyons            		23-May-2023
 **                Initial delivery
 **
 *******************************************************************************/
 
 // Set timescale to nanoseconds
 `timescale 1ns / 1ps
+`default_nettype none
 
 module controller_fsm_tb(); 
 
@@ -47,7 +50,7 @@ module controller_fsm_tb();
     // Declare testbench output variables
     wire wire_LoadIR, wire_IncPC, wire_SelPC, wire_LoadPC, wire_LoadReg, wire_LoadAcc;
     wire [1:0] wire_SelAcc;
-    wire [3:0] wire_SelAlu;
+    wire [3:0] wire_SelALU;
 
     // Define parameters
     parameter   c_ADD         = 4'b0001,      // ACC = REG + ACC
@@ -65,6 +68,7 @@ module controller_fsm_tb();
                 c_NOP         = 4'b0000,      // NO OP (PC = PC + 1)
                 c_HALT        = 4'b1111;      // HALT PC (PC = PC)
 
+    // Instantiate unit under test
     controller_fsm DUT(
         .LoadIR(wire_LoadIR),
         .IncPC(wire_IncPC),
@@ -74,7 +78,7 @@ module controller_fsm_tb();
         .LoadAcc(wire_LoadAcc),
         .SelAcc(wire_SelAcc),
         .SelALU(wire_SelALU),
-        .Opcode(wire_Opcode),
+        .Opcode(r_Opcode),
         .Clk(r_Clk),
         .Z(r_Z),
         .C(r_C),
@@ -82,21 +86,17 @@ module controller_fsm_tb();
     );
 
 
-    initial 
-    begin
+    // Set period to 10ns
+    always #5 r_Clk =~ r_Clk;
+
+    // Test stimulus
+    initial begin
         r_Clk = 0;
         r_Z = 0;
         r_C = 0;
         r_CLB = 0;
         r_Opcode = c_ADD; 
         #5
-
-        // Set period to 10ns
-        forever #5 r_Clk =~ r_Clk;
-    end
-
-    initial begin
-        forever begin
 
             // Test ALU related opcodes for 10 cycles
             r_Opcode = c_ADD;      
@@ -149,6 +149,7 @@ module controller_fsm_tb();
             // Test default case for 10 cycles
             r_Opcode = 4'b1001;      
             #100;
-	    end
+
+	$stop;
     end
 endmodule
