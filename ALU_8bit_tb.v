@@ -3,24 +3,24 @@
 
 module ALU_8bit_tb;
 
-// TODO: refactor to params file and include
+// Opcodes - THESE SHOULD ALWAYS MATCH PROCESSOR OPCODES FOR ALU OPERATIONS
 parameter [3:0] NOP 	= 4'b0000, // No-operation
-				ADD 	= 4'b0001, // A+B
-				SUB 	= 4'b0010, // A - B
-				NOR 	= 4'b0011, // A / B
-				SHFL 	= 4'b1100, // Bitwise shift A left
-				SHFR 	= 4'b1011, // Bitwise shift A right
+		ADD 	= 4'b0001, // A+B
+		SUB 	= 4'b0010, // A - B
+		NOR 	= 4'b0011, // A / B
+		SHFL 	= 4'b1100, // Bitwise shift A left
+		SHFR 	= 4'b1011, // Bitwise shift A right
 				
-				RES1    = 4'b0101, // Reserved Opcodes
-				RES2    = 4'b0110,
-				RES3    = 4'b0111,
-				RES4    = 4'b1000,
-				RES5    = 4'b1001,
-				RES6    = 4'b1010,
-				RES7    = 4'b1101,
-				RES8    = 4'b1110,
-				RES9    = 4'b1111,
-				RES10 	= 4'b0100;
+		RES1    = 4'b0101, // Reserved Opcodes
+		RES2    = 4'b0110,
+		RES3    = 4'b0111,
+		RES4    = 4'b1000,
+		RES5    = 4'b1001,
+		RES6    = 4'b1010,
+		RES7    = 4'b1101,
+		RES8    = 4'b1110,
+		RES9    = 4'b1111,
+		RES10 	= 4'b0100;
 
    /*This particular task checks the output of our circuit against a 
      known answer and prints a message based on the outcome. Additionally, 
@@ -69,6 +69,7 @@ parameter [3:0] NOP 	= 4'b0000, // No-operation
 		.alu_b_in(B)
 	);
 
+	// Test stimulus
 	initial begin
 
 		// Initialize inputs
