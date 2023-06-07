@@ -29,8 +29,8 @@
 **
 **    Rev         Author              		Date
 ** -----------------------------------------------------------------------------
-**    1.1         N. Lyons, A. Benedetti        6-4-2023
-**                Fixed default nets
+**    1.1         A. Benedetti, N. Lyons         6-4-2023
+**                Fixed default nets, cleanup
 **
 **    1.0         N. Lyons            		23-May-2023
 **                Initial delivery
@@ -96,59 +96,59 @@ module controller_fsm_tb();
         r_C = 0;
         r_CLB = 0;
         r_Opcode = c_ADD; 
-        #5
 
-            // Test ALU related opcodes for 10 cycles
-            r_Opcode = c_ADD;      
-            #20;
-            r_Opcode = c_SUB;      
-            #20;
-            r_Opcode = c_NOR;      
-            #20;
-            r_Opcode = c_SHFR;      
-            #20;
-            r_Opcode = c_SHFL;      
-            #20;                                                
 
-            // Test storing register in acc opcode for 10 cycles
-            r_Opcode = c_REG_TO_ACC;      
-            #100;
+		// Test ALU related opcodes for 10 cycles
+		r_Opcode = c_ADD;      
+		#100;
+		r_Opcode = c_SUB;      
+		#100;
+		r_Opcode = c_NOR;      
+		#100;
+		r_Opcode = c_SHFR;      
+		#100;
+		r_Opcode = c_SHFL;      
+		#100;                                                
 
-            // Test storing acc in register opcode for 10 cycles
-            r_Opcode = c_ACC_TO_REG;      
-            #100;
+		// Test storing register in acc opcode for 10 cycles
+		r_Opcode = c_REG_TO_ACC;      
+		#100;
 
-            // Test storing immediate in acc opcode for 10 cycles
-            r_Opcode = c_IMM_TO_ACC;      
-            #100;
+		// Test storing acc in register opcode for 10 cycles
+		r_Opcode = c_ACC_TO_REG;      
+		#100;
 
-            // Test jump register opcode for 10 cycles
-            r_Opcode = c_JMPZ_REG;      
-            #100;
-            
-            // Test jump immediate opcode for 10 cycles
-            r_Opcode = c_JMPZ_IMM;      
-            #100;
+		// Test storing immediate in acc opcode for 10 cycles
+		r_Opcode = c_IMM_TO_ACC;      
+		#100;
 
-            // Test jump register opcode for 10 cycles
-            r_Opcode = c_JMPC_REG;      
-            #100;
-            
-            // Test jump immediate opcode for 10 cycles
-            r_Opcode = c_JMPC_IMM;      
-            #100;
+		// Test jump register opcode for 10 cycles
+		r_Opcode = c_JMPZ_REG;      
+		#100;
+		
+		// Test jump immediate opcode for 10 cycles
+		r_Opcode = c_JMPZ_IMM;      
+		#100;
 
-            // Test nop opcode for 10 cycles
-            r_Opcode = c_NOP;      
-            #100;
+		// Test jump register opcode for 10 cycles
+		r_Opcode = c_JMPC_REG;      
+		#100;
+		
+		// Test jump immediate opcode for 10 cycles
+		r_Opcode = c_JMPC_IMM;      
+		#100;
 
-            // Test hault pc opcode for 10 cycles
-            r_Opcode = c_HALT;      
-            #100;
+		// Test nop opcode for 10 cycles
+		r_Opcode = c_NOP;      
+		#100;
 
-            // Test default case for 10 cycles
-            r_Opcode = 4'b1001;      
-            #100;
+		// Test hault pc opcode for 10 cycles
+		r_Opcode = c_HALT;      
+		#100;
+
+		// Test default case for 10 cycles
+		r_Opcode = 4'b1001;      
+		#100;
 
 	$stop;
     end

@@ -149,7 +149,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
         
 	// Stop processor, do not load another instruction
         HALT : begin
-        	LoadIR  <= 1'b0;  // DO NOT LOAD ANOTHER INSTRUCTION
+        LoadIR  <= 1'b0;  // DO NOT LOAD ANOTHER INSTRUCTION
 		IncPC   <= 1'b0;  // Do not update PC
 		SelPC   <= 1'bx;  // Mux output does not matter for this case
 		LoadPC  <= 1'b0;  // Do not load PC from mux wire, PC should not change
@@ -161,7 +161,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
         
 	// Unrecognized instruction
         default : begin
-        	LoadIR  <= 1'bx;       	
+        LoadIR  <= 1'bx;       	
 		IncPC   <= 1'bx; 
 		SelPC   <= 1'bx;
 		LoadPC  <= 1'bx;
