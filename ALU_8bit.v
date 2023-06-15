@@ -1,13 +1,16 @@
 `timescale 1ns / 1ps
 
-/* 8 bit ALU module */
+// Description
+//! A combinational digital circuit that performs arithmetic and bitwise operations 
+//! on integer binary numbers.
+
 module ALU_8bit(
-	output reg [7:0]alu_out,	// 8 bit result connected to mux that is connected to ACC
-	output reg alu_zero_flag,	// Set if result is zero, connected to controller
-	output reg alu_carry_out,	// Set if carry bit is needed, connected to controller
-	input [3:0] alu_select,		// Select ALU operation, received from controller 
-	input [7:0] alu_a_in,		// 8 bit ALU input from ACC
-	input [7:0] alu_b_in		// 8 bit ALU input from REG
+	output reg [7:0]alu_out,	//! 8 bit result (connected to mux that is connected to ACC)
+	output reg alu_zero_flag,	//! Set if result is zero (connected to controller)
+	output reg alu_carry_out,	//! Set if carry bit is needed (connected to controller)
+	input [3:0] alu_select,		//! Select ALU operation (received from controller) 
+	input [7:0] alu_a_in,		//! ACC ALU input
+	input [7:0] alu_b_in		//! REG ALU input
     );
     
 // Opcodes - THESE SHOULD ALWAYS MATCH PROCESSOR OPCODES FOR ALU OPERATIONS
@@ -19,8 +22,7 @@ parameter [3:0] 	NOP 	= 4'b0000, // No-operation
 			SHFR 	= 4'b1011; // Bitwise shift A right
 				
 				
-	// The ALU is combinational, so the outputs should
-	// update any time the inputs change
+	//! The ALU outputs change anytime the inputs change (combinational logic).
 	always@(alu_a_in or alu_b_in or alu_select)
 	begin
 	

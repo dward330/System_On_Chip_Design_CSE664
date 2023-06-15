@@ -1,20 +1,21 @@
 `timescale 1ns / 1ps
 
-// Module for controller fsm
+// Description
+//! Model that uses a known set of inputs to define several combinations of outputs and states.
 module controller_fsm(
-    output reg LoadIR,          // Load instruction register with next instruction - Should be checked before update
-    output reg IncPC,           // Increment program counter only to next instruction
-    output reg SelPC,           // Increment PC by immediate or val in reg
-    output reg LoadPC,          // Signal to update PC value - Should be checked before JUMP ONLY
-    output reg LoadReg,         // Signal to update register - Should be checked before update
-    output reg LoadAcc,         // Signal to update accumulator - Should be checked before update
-    output reg [1:0] SelAcc,    // Select signal for ACC muxes - SelAcc[1] = SelAcc1, SelAcc[0] = SelAcc0
-    output reg [3:0] SelALU,    // Select signal for ALU operation (opcode)
-    input wire [3:0] Opcode,     // Opcode from instruction register
-    input wire Clk,              // Clock signal
-    input wire Z,                // Zero bit
-    input wire C,                // Carry bit
-    input wire CLB               // TODO: WHAT IS THIS?
+    output reg LoadIR,          //! Load instruction register with next instruction - (Should be checked before update)
+    output reg IncPC,           //! Program counter which is incremented only to next instruction
+    output reg SelPC,           //! Used to increment PC by immediate or val in reg
+    output reg LoadPC,          //! Signal to update PC value - (Should be checked before JUMP ONLY)
+    output reg LoadReg,         //! Signal to update register - (Should be checked before update)
+    output reg LoadAcc,         //! Signal to update accumulator - (Should be checked before update)
+    output reg [1:0] SelAcc,    //! Select signal for ACC muxes - (SelAcc[1] = SelAcc1, SelAcc[0] = SelAcc0)
+    output reg [3:0] SelALU,    //! Select signal for ALU operation (opcode)
+    input wire [3:0] Opcode,     //! Opcode from instruction register
+    input wire Clk,              //! Clock signal
+    input wire Z,                //! Zero bit
+    input wire C,                //! Carry bit
+    input wire CLB               //! TODO: WHAT IS THIS?
     );
     
 parameter   ADD         = 4'b0001,      // ACC = REG + ACC
@@ -33,7 +34,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
             HALT        = 4'b1111;      // HALT PC (PC = PC)
     
     
-    // Case statement for setting control signals
+    //! Case statement for setting control signals
     always@(Clk) begin
     
 	// Signals vary by opcode
