@@ -1,24 +1,31 @@
 // Accumulator
 // A register for temporarily storing ALU results
 
+// Description
+//! A register in which intermediate arithmetic logic unit results are stored.
+//! This simple 8-bit accumulator's output will continuously grow by increments of
+//! the input until reset.
+//! 
+//! Note - Overflow is not handled
 
-// Simple 8-bit Accumulator
-// Doesn't take into account overflow if reset!=1
 `timescale 1ns / 1ps
 module acc_simple (out, in, clock, reset);
 
 // ----- Input Ports -----
-	input clock; 		// clock. output only changes on posedge
-	input reset; 		// for clearing register value
-	input [7 : 0] in;	// input from ALU
+	input clock; 		//! Clock. Output is posedge triggered
+	input reset; 		//! Clears register value (1 = clear, 0 = hold)
+	input [7 : 0] in;	//! Input from ALU
 
 // ----- Output Port -----
-	output [7 : 0] out;	// output return to ALU
+	output [7 : 0] out;	//! Output return to ALU
 
 // ----- Accumulator -----
-	reg [7 : 0] accumulator = 8'b00000000;	// accumulator for ALU temporary storage
+	reg [7 : 0] accumulator = 8'b00000000;	//! Temporary storage for accumulator output
 
-// Process
+
+//! Increments output by input at rising edge of clock.
+//! If reset is high then clear output. 
+//!
 always @(posedge clock or posedge reset)	// at posedge of clock or reset=1
 begin
 	if (reset)				// if reset = 1
