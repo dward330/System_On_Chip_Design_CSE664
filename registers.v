@@ -18,9 +18,9 @@ input [register_size-1:0] data_in;
 
 input clock, reset, load, store;
 
-input [3:0] load_addr;
+input wire [3:0] load_addr;
 
-input [3:0] store_addr;
+input wire [3:0] store_addr;
 
 
 always @(posedge clock or negedge reset) begin
@@ -41,19 +41,15 @@ end
 
 always @(posedge clock) begin
 
-if (reset == 1 && load == 1) begin
+if (reset == 1 && load == 1 && store == 0) begin
 
-		registers[load_addr] = data_in;
-
-end
+		datatogoout <= registers[load_addr];
 
 end
 
-always @(posedge clock) begin
+if (reset == 1 && store == 1 && load == 0) begin
 
-if (reset == 1 && store == 1) begin
-
-		datatogoout= registers[store_addr];
+		registers[store_addr] = data_in;
 
 end
 
@@ -62,5 +58,4 @@ end
 assign data_out = datatogoout;
 
 endmodule
-
 
