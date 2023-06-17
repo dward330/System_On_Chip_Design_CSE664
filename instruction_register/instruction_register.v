@@ -1,14 +1,15 @@
 `timescale 1ns / 1ps
 
-module instruction_register(clock, reset, instruction, opcode, data);
+module instruction_register(clock, reset, instruction, opcode, data_out, LoadIR);
 
 
     // necessities 
     input clock;
     input reset;
+	input LoadIR;
 
     // non-opcode 4 bits  
-    output [3:0] data;
+    output [3:0] data_out;
 
     // opcode 
     output [3:0] opcode;
@@ -19,18 +20,19 @@ module instruction_register(clock, reset, instruction, opcode, data);
     input [7:0] instruction;
 
     // if a new instruction is sent to the register 
-    always @(posedge clock, negedge reset)
+    always @(posedge clock or posedge reset)
     begin
 
+		// asynchronous active high reset to noop
         if (reset) begin
             tmp_opcode <= 4'b0000;
             tmp_data <= 4'b0000; 
 
         // if reset is low
         // send opcode to controller
-        // send data to instruction registers
+        // send data to instruction registers / immediate
         end
-        else if (instruction) begin
+        else if (LoadIR) begin
             tmp_opcode <= instruction[7:4];
             tmp_data <= instruction[3:0];
         end
@@ -38,7 +40,7 @@ module instruction_register(clock, reset, instruction, opcode, data);
     end
 
     assign opcode = tmp_opcode;
-    assign data = tmp_data;
+    assign data_out = tmp_data;
 
 
 endmodule
