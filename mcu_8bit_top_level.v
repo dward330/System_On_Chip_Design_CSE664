@@ -40,7 +40,7 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 
 	// 7. TODO: IR Reg Wires
 	wire [3:0] immediate;
-	wire [1:0] regAdd;
+	wire [3:0] regAddress;
 	wire [3:0] Opcode;
 	 
 	 
@@ -55,7 +55,15 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	* to execute, and supports an asynchronous reset.
 	*/
 	  
-	// 1. Instruction memory (TODO)
+	// 1. Instruction memory 
+	
+	// 1.1 Instruction Reg (TODO)
+
+	// 1.2: Output data for instruction register
+	// is the immediate and register address
+	// It will get dropped / blocked by control signals
+	// if not intended to be used in the given instruction
+
 
 	// 2. MUX2_PC:
 	// Passes jump address to PC from register file or immediate
@@ -91,8 +99,22 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
     );
 
 
-	// 5. Register File (TODO)
-
+	// 5. Register File
+	// Takes in reset and clock
+	// LoadReg to update stored values
+	// Takes in address of register
+	// Can read data out or write to register
+	// Data being read out will either be used or 
+	// dropped, so there is no need for read control
+	register_unit register_file
+	(
+		.reset(Reset),
+		.clock(Clk),
+		.load(LoadReg),
+		.addr(regAddress),
+		.data_out(reg_out),
+		.data_in(acc_out)
+	);
 
 	// 6. ALU 
 	// Instantiation of the ALU that takes
@@ -139,8 +161,14 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	);
 
 
-	// 9. Accumulator (TODO)
-	  
+	// 9. Accumulator 
+	acc accumulator(
+		.out(acc_out),
+		.in(acc_in),
+		.update(LoadAcc),
+		.clock(Clk),
+		.reset(Reset)
+	);
  	 
 endmodule // end of mcu_8bit
 	
