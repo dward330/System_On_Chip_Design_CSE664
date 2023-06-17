@@ -13,7 +13,7 @@ module program_counter(clk, reset, IncPC, LoadPC, new_count, count);
 	output reg [7:0] count; //output address of the program counter
 
 	//clocked operation
-	always @ (posedge clk) begin
+	always @ (posedge clk, negedge reset) begin
 		if(reset==0) begin //if the reset line is low, zero the counter
 			count <= 0;
 		end
