@@ -2,12 +2,12 @@
 // Program Counter - Register that contains the adress of the instruction bieng executed
 // It counts the instructions opcodes from 0000 to 1111 and it signals the memory address of next instruction to be fetched and executed
 
-// Set timescale to nanoseconds
+//set timescale to nanoseconds
 `timescale 1ns / 1ps
 
 module program_counter(clk, reset, LoadPC, IncPC, new_count, count);
 	
-	// declare input/ output variables
+	//declare input/ output variables
 	input clk;
  	input reset; //synchronous reset when active low
  	input LoadPC; //only increment the counter when this signal is high
