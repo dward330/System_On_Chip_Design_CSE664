@@ -1,4 +1,3 @@
-
 // Module to store up to 16 numbers that are 8 bits long
 module register_unit (reset, clock, load, store, load_addr, store_addr, data_out, data_in);
 
@@ -50,5 +49,3 @@ end
 assign data_out = datatogoout;
 
 endmodule
-
-

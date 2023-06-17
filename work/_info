@@ -1,0 +1,212 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664
+vacc
+Z1 !s110 1687026074
+!i10b 1
+!s100 cmH8YC[JS<Ak0zZ5UVXKK0
+IAYOm=45IBKZzOS[3k`kNV1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1687025470
+Z4 8accumulator.v
+Z5 Faccumulator.v
+L0 66
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1687026074.000000
+Z8 !s107 nbit_two_one_mux_tb.v|nbit_two_one_mux.v|controller_fsm_tb.v|controller_fsm.v|accumulator_tb.v|accumulator.v|ALU_8bit_tb.v|ALU_8bit.v|
+Z9 !s90 -reportprogress|300|ALU_8bit.v|ALU_8bit_tb.v|accumulator.v|accumulator_tb.v|controller_fsm.v|controller_fsm_tb.v|nbit_two_one_mux.v|nbit_two_one_mux_tb.v|
+!i113 1
+Z10 tCvgOpt 0
+vacc_simple
+R1
+!i10b 1
+!s100 RR]5EgE7<]X>hdoZDcE@V0
+Iz5ZPnOoWQB4:BUMl3QSb33
+R2
+R0
+R3
+R4
+R5
+Z11 L0 34
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vacc_simple_tb
+R1
+!i10b 1
+!s100 057:ezgF>Fe<2nBlU;VHg2
+I14K[UO]J^1cNKCk9aSJ6U1
+R2
+R0
+Z12 w1687026063
+Z13 8accumulator_tb.v
+Z14 Faccumulator_tb.v
+R11
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vacc_v1_tb
+R1
+!i10b 1
+!s100 [CAjBgXgmeInG:zYT>OgZ2
+I<H`5oHhhi>5lE[ZnnY6`Y0
+R2
+R0
+R12
+R13
+R14
+L0 80
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vALU_8bit
+R1
+!i10b 1
+!s100 8cM=7;QX8J5ZKfjI:3L>02
+Ik9ncWZzK2Pk:?UUf_[KP63
+R2
+R0
+Z15 w1687005900
+8ALU_8bit.v
+FALU_8bit.v
+L0 7
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+n@a@l@u_8bit
+vALU_8bit_tb
+R1
+!i10b 1
+!s100 8=EjgSCid[BLW55NTh2131
+ISG^]KMSRe1bd6]NFlWKKL1
+R2
+R0
+R15
+8ALU_8bit_tb.v
+FALU_8bit_tb.v
+L0 4
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+n@a@l@u_8bit_tb
+vcontroller_fsm
+R1
+!i10b 1
+!s100 9I?`j8Si3M=^CnV1WTjGI2
+IXG4QhX0mLgQW:Mehh<fFK2
+R2
+R0
+R15
+8controller_fsm.v
+Fcontroller_fsm.v
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vcontroller_fsm_tb
+R1
+!i10b 1
+!s100 lWA3Yc1]cRLPk5hZ2?6lc3
+IlS[LfBN@83D[kiY^0j4=]2
+R2
+R0
+R15
+8controller_fsm_tb.v
+Fcontroller_fsm_tb.v
+L0 44
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vnbit_two_one_mux
+R1
+!i10b 1
+!s100 hBe=b=^[2KFk_JOKN_GZ12
+I:5zDIRK=@3M>d0>8;jS`]1
+R2
+R0
+R15
+8nbit_two_one_mux.v
+Fnbit_two_one_mux.v
+L0 48
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+vnbit_two_one_mux_tb
+R1
+!i10b 1
+!s100 ;MjE90eC]T78ZzGUeno`j1
+ISjLJ:o`C^O[fTI`;CO[DJ0
+R2
+R0
+w1685581319
+8nbit_two_one_mux_tb.v
+Fnbit_two_one_mux_tb.v
+L0 6
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
