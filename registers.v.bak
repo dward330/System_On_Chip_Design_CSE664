@@ -34,13 +34,21 @@ always @(posedge clock or posedge reset) begin
 		datatogoout <= 0;
 	end
 
+	else if (load == 1 && store == 1) begin
+		// Fetch data stored from internal register slot and return it to the outside
+		datatogoout <= registers[load_addr];
+
+		// Store data from the outside into an internal register slot
+		registers[store_addr] <= data_in;
+	end
+
 	// Fetch data stored from internal register slot and return it to the outside
-	else if (load == 1) begin
+	else if (load == 1) begin // not possible for store to also be 1 at this conditional check, previous "else if" would have executed
 		datatogoout <= registers[load_addr];
 	end
 
 	// Store data from the outside into an internal register slot
-	else if (store == 1) begin
+	else if (store == 1) begin // not possible for load to also be 1 at this conditional check, the first "else if" would have executed
 		registers[store_addr] <= data_in;
 	end
 
