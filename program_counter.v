@@ -3,7 +3,7 @@
 // It counts the instructions opcodes from 0000 to 1111 and it signals the memory address of next instruction to be fetched and executed
 
 `timescale 1ns / 1ps
-module program_counter(clk, reset, IncPC, LoadPC, new_count, count);
+module program_counter(clk, reset, LoadPC, IncPC, new_count, count);
 	
 	input clk;
  	input reset; //synchronous reset when active low
@@ -26,7 +26,3 @@ module program_counter(clk, reset, IncPC, LoadPC, new_count, count);
 	end
 
 endmodule
-
-
-
-
