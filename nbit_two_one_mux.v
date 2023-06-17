@@ -41,23 +41,27 @@
 	);
 	
  */
+
+ // Description 
+ //! A data selector device that selects between several analog 
+ //! or digital input signals and forwards the selected input to a single output line.
 module nbit_two_one_mux 
 #(parameter 
-	A_WIDTH=1,  // Width of INPUT BUS A
-	B_WIDTH=1,  // Width of INPUT BUS B
-	OUT_WIDTH=1	// Width of output
+	A_WIDTH=1,  //! Width of INPUT BUS A
+	B_WIDTH=1,  //! Width of INPUT BUS B
+	OUT_WIDTH=1	//! Width of output
 )
-(	bus_out,	// Output bus
-	bus_a,		// Input bus A
-	bus_b, 		// Input bus B
-	select		// Select Signal
+(	bus_out,	//! Output bus
+	bus_a,		//! Input bus A
+	bus_b, 		//! Input bus B
+	select		//! Select Signal
 );
 	
 	// Set up wire buses with parameterized widths
-	output wire [OUT_WIDTH-1:0] bus_out;
-	input wire  [A_WIDTH-1:0] 	bus_a;
-	input wire  [B_WIDTH-1:0] 	bus_b;
-	input wire  select;
+	output wire [OUT_WIDTH-1:0] bus_out; //! Output bus
+	input wire  [A_WIDTH-1:0] 	bus_a;	//! Input bus A
+	input wire  [B_WIDTH-1:0] 	bus_b;	//! Input bus B
+	input wire  select;					//! Select Signal
 
 	// Ternary operator to cover mux logic, needs "assign"
 	assign bus_out = select ? bus_b : bus_a;

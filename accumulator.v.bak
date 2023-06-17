@@ -59,9 +59,7 @@ end
 endmodule
 
 /*******************************************************************************
-**
 ** v1.1
-**
 *******************************************************************************/
 module acc (out, in, update, clock, reset);
 
@@ -89,4 +87,90 @@ begin
 		accumulator <= accumulator + in; // store value in accumulator if change bit = 1
 end
 	assign out = accumulator; 		// send value back to ALU
+endmodule
+
+/*******************************************************************************
+**
+** Accumulator Testbench
+**
+*******************************************************************************/
+
+`timescale 1ns / 1ps
+module acc_simple_tb;
+
+	reg clock;
+	reg reset;
+	reg [7 : 0] in;
+	wire [7 : 0] out;
+
+	acc_simple acc(.out(out), .in(in), .clock(clock), .reset(reset));
+
+	initial 
+		begin	// simulate clock
+		clock = 1'b0;
+		forever begin
+			#1 clock = ~clock;
+		end
+	end
+	
+	initial
+		begin
+		#0 reset <= 0;
+		in <= 8'b10110010;
+		#2 reset <= 0;
+		in <= 8'b00000010;
+		#2 reset <= 0;
+		in <= 8'b00001111;
+		#2 reset <= 1;
+		in <= 8'b11100010;
+		#2 reset <= 0;
+		in <= 8'b00011010;
+		#2 reset <= 0;
+		in <= 8'b00000011;
+		#2 reset <= 1;
+		in <= 8'b10101010;
+		#2 reset <= 0;
+		in <= 8'b01010101;
+		#2 $finish;
+	end
+endmodule
+
+`timescale 1ns / 1ps
+module acc_tb;
+
+	reg clock;
+	reg reset;
+	reg [7 : 0] in;
+	wire [7 : 0] out;
+
+	acc_simple acc(.out(out), .in(in), .clock(clock), .reset(reset));
+
+	initial 
+		begin	// simulate clock
+		clock = 1'b0;
+		forever begin
+			#1 clock = ~clock;
+		end
+	end
+	
+	initial
+		begin
+		#0 reset <= 0;
+		in <= 8'b10110010;
+		#2 reset <= 0;
+		in <= 8'b00000010;
+		#2 reset <= 0;
+		in <= 8'b00001111;
+		#2 reset <= 1;
+		in <= 8'b11100010;
+		#2 reset <= 0;
+		in <= 8'b00011010;
+		#2 reset <= 0;
+		in <= 8'b00000011;
+		#2 reset <= 1;
+		in <= 8'b10101010;
+		#2 reset <= 0;
+		in <= 8'b01010101;
+		#2 $finish;
+	end
 endmodule
