@@ -1,0 +1,71 @@
+//Sub: Subtract register from accumulator
+
+000 8'b00000000 // NOP
+
+002 8'b11010011 // IMM 3 to ACC (ACC = 3)
+
+004 8'b01010000 // ACC to reg 0 (Reg 0 = 3)
+
+008 8'b11010001 // IMM 1 to ACC (ACC = 1)
+
+004 8'b01010001 // ACC to reg 1 (Reg 1 = 1)
+
+010 8'b00010000 // Add reg 0 to ACC (Reg 1 + ACC 3 = ACC 4)
+
+012 8'b01010010 // ACC to reg 2 (Reg 2 = 4)
+
+014 8'b11000000 // Shift right ACC (ACC 4/2 = 2)
+
+016 8'b01010011 // ACC to reg 3 (reg 3 = 2)
+
+018 8'b00110000 // NOR reg 1 to ACC (Nor 1, 3 = 252; 11111100)
+
+020 8'b01010100 // ACC to reg 4 (reg 4 = 252)
+
+022 8'010000010 // Register 2 to ACC (ACC = 4)
+
+024 8'b10110000 // Shift left ACC (4*2 = 8)
+
+026 8'b01010101 // ACC to register 5 (reg 5 = 8)
+
+028 8'b10110000 // Shift left ACC (8 * 2 = 16)
+
+030 8'b10110000 // Shift left ACC (16 * 2 = 32)
+
+032 8'b10110000 // Shift left ACC (32 * 2 = 64)
+
+038 8'b01010110 // ACC to reg 6 (reg 6 = 64)
+
+040 8'b11010000 // IMM 1 to ACC (ACC = 1)
+
+042 8'b10000110 // Branch to value of reg 6 (64) if ACC < 0 (should not branch)
+
+044 8'b01100110 // Branch to value of reg 6 if ACC = 0 (should not branch)
+
+046 8'b10000110 // Branch to 6 if ACC < 0 (should not branch)
+
+048 8'010000100 // Register 4 to ACC (ACC = 252)
+
+050 8'b00100110 // Sub ACC (252) - Reg 6 (64) = 188
+
+052 8'b01011000 // ACC to reg 8 (reg 8 = 188)
+
+054 8'b11010000 // IMM 0 to ACC (ACC = 0)
+
+056 8'b01100110 // Branch to value of reg 6 if ACC = 0 (should branch)
+
+058 8'b11110000 // HALT; end of program
+
+
+
+
+
+
+
+064 8'b00000000 // NOP (branch destination)
+
+066 8'b11011111 // IMM 15 to ACC
+
+068 8'b01011111 // ACC to reg 15 (Reg 15 = 15)
+
+070 8'b11110000 // HALT; end of program
