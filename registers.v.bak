@@ -1,5 +1,5 @@
 // Module to store up to 16 numbers that are 8 bits long
-module register_unit (reset, clock, load, store, load_addr, store_addr, data_out, data_in);
+module register_unit (reset, clock, load, addr, data_out, data_in);
 
 //register size
 parameter register_count = 16;
@@ -17,11 +17,9 @@ output [register_size-1:0] data_out;
 
 input wire [register_size-1:0] data_in;
 
-input wire clock, reset, load, store;
+input wire clock, reset, load;
 
-input wire[3:0] load_addr;
-
-input wire[3:0] store_addr;
+input wire[3:0] addr;
 
 //Only run when we detect a positive clock edge rise
 always @(posedge clock or posedge reset) begin
@@ -34,24 +32,13 @@ always @(posedge clock or posedge reset) begin
 		datatogoout <= 0;
 	end
 
-	else if (load == 1 && store == 1) begin
-		// Fetch data stored from internal register slot and return it to the outside
-		datatogoout <= registers[load_addr];
-
-		// Store data from the outside into an internal register slot
-		registers[store_addr] <= data_in;
+	// Store data from the outside into an internal register slot
+	else if (load == 1) begin
+		registers[addr] <= data_in;
 	end
 
 	// Fetch data stored from internal register slot and return it to the outside
-	else if (load == 1) begin // not possible for store to also be 1 at this conditional check, previous "else if" would have executed
-		datatogoout <= registers[load_addr];
-	end
-
-	// Store data from the outside into an internal register slot
-	else if (store == 1) begin // not possible for load to also be 1 at this conditional check, the first "else if" would have executed
-		registers[store_addr] <= data_in;
-	end
-
+	datatogoout <= registers[addr];
 end
 
 assign data_out = datatogoout;
