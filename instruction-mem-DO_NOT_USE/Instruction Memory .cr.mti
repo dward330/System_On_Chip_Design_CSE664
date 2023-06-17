@@ -1,8 +1,0 @@
-/home/thedude/intelFPGA/20.1/modelsim_ase/bin/work/instruction-memory_tb.v {1 {vlog -work work -stats=none /home/thedude/intelFPGA/20.1/modelsim_ase/bin/work/instruction-memory_tb.v
-Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
--- Compiling module ins_mem_tb
-
-Top level modules:
-	ins_mem_tb
-
-} {} {}}
