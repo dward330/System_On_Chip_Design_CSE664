@@ -1,4 +1,4 @@
-// Set timescale to nanoseconds
+//set timescale to nanoseconds
 `timescale 1ns / 1ps
 
 module program_counter_tb;
@@ -8,6 +8,7 @@ module program_counter_tb;
 	reg reset;
 	reg LoadPC;
 	reg IncPC;
+	reg [7:0] new_count;
 
 	//declare output variables
 	wire [7:0] count;
@@ -31,5 +32,6 @@ module program_counter_tb;
 		reset = 0;
 		
 	$stop;  
-	end    
+	end  
+  
 endmodule
