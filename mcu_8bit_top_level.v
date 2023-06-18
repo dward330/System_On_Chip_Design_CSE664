@@ -38,10 +38,10 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	// 6. MUX2_PC to PC wire
 	wire pc_jump;
 
-	// 7. TODO: IR Reg Wires
-	wire [3:0] immediate;
-	wire [3:0] regAddress;
+	// 7. IR Reg Wires
+	wire [3:0] ir_data; // maps to both immediate and regAddress
 	wire [3:0] Opcode;
+	wire [7:0] instruction; // From IM to IR
 	 
 	 
 	/* end of internal nets */
@@ -55,15 +55,19 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	* to execute, and supports an asynchronous reset.
 	*/
 	  
-	// 1. Instruction memory 
+	// 1. Instruction memory (TODO)
+
 	
-	// 1.1 Instruction Reg (TODO)
-
-	// 1.2: Output data for instruction register
-	// is the immediate and register address
-	// It will get dropped / blocked by control signals
-	// if not intended to be used in the given instruction
-
+	// 1.1 Instruction Reg 
+	instruction_register instr_reg
+	(
+		.clock(Clk), 
+		.reset(Reset), 
+		.instruction(instruction), 
+		.opcode(Opcode), 
+		.data_out(ir_data), 
+		.LoadIR(LoadIR)
+	);
 
 	// 2. MUX2_PC:
 	// Passes jump address to PC from register file or immediate
@@ -74,12 +78,20 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	MUX2_PC (
 		.bus_out(pc_jump), 
 		.bus_a(reg_out), 
-		.bus_b(immediate), 
+		.bus_b(ir_data), 
 		.select(SelPC)
 	);
 
-	// 3. Program Counter (TODO)
-
+	// 3. Program Counter 
+	program_counter pc_module
+	(
+		.clk(Clk),
+		.reset(Reset),
+		.LoadPC(LoadPC),
+		.IncPC(IncPC),
+		.new_count(pc_jump),
+		.count(currentPC)
+	);
 
 	// 4. Control Unit FSM 
 	controller_fsm controller_fsm(
@@ -111,7 +123,7 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 		.reset(Reset),
 		.clock(Clk),
 		.load(LoadReg),
-		.addr(regAddress),
+		.addr(ir_data),
 		.data_out(reg_out),
 		.data_in(acc_out)
 	);
@@ -141,7 +153,7 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	.OUT_WIDTH(8))
 	MUX2_A0 (
 		.bus_out(a0_to_a1), 
-		.bus_a(immediate), 
+		.bus_a(ir_data), 
 		.bus_b(reg_out), 
 		.select(SelAcc[0])
 	);
