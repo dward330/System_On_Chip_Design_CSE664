@@ -15,7 +15,7 @@ module controller_fsm(
     input wire Clk,              //! Clock signal
     input wire Z,                //! Zero bit
     input wire C,                //! Carry bit
-    input wire CLB               //! TODO: WHAT IS THIS?
+    input wire CLB               //! TODO: WHAT IS THIS? - Replace with reset
     );
     
 parameter   ADD         = 4'b0001,      // ACC = REG + ACC
