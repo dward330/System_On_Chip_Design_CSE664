@@ -14,7 +14,7 @@ case(count)
 
 8'b00001010: out = 8'b11011000; //010 IMM 8 to ACC (ACC = 8)
 
-8'b00001100: out = 8'b01111000; //006 Branch to IMM 8 if ACC = 0 (line 008) (should not be taken)
+8'b00001100: out = 8'b01111000; //012 Branch to IMM 8 if ACC = 0 (line 008) (should not be taken)
 
 8'b00001110: out = 8'b01010000; //014 ACC to reg 0 (Reg 0 = 8)
 
