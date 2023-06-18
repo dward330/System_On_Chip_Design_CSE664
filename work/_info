@@ -9,7 +9,7 @@ z2
 cModel Technology
 dC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/SOC_CSE664
 vacc
-Z0 !s110 1687032132
+Z0 !s110 1687121641
 !i10b 1
 !s100 cmH8YC[JS<Ak0zZ5UVXKK0
 I_d5CDl@Dbj]VhimV4lkVb3
@@ -23,7 +23,7 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1687032132.000000
+Z7 !s108 1687121641.000000
 Z8 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator.v|
 Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator.v|
 !i113 1
@@ -51,44 +51,44 @@ R9
 R10
 R11
 vacc_simple_tb
-R0
+Z13 !s110 1687121207
 !i10b 1
 !s100 057:ezgF>Fe<2nBlU;VHg2
 IG]fCkKa`aoK:eIeVMzU_d2
 R1
 R2
 R3
-Z13 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v
-Z14 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v
+Z14 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v
+Z15 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v
 R12
 R6
 r1
 !s85 0
 31
-R7
-Z15 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v|
-Z16 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v|
+Z16 !s108 1687121207.000000
+Z17 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v|
+Z18 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/accumulator_tb.v|
 !i113 1
 R10
 R11
 vacc_v1_tb
-R0
+R13
 !i10b 1
 !s100 [CAjBgXgmeInG:zYT>OgZ2
 IbElljeX?jXKed=OLLO00h2
 R1
 R2
 R3
-R13
 R14
+R15
 L0 80
 R6
 r1
 !s85 0
 31
-R7
-R15
 R16
+R17
+R18
 !i113 1
 R10
 R11
@@ -99,7 +99,7 @@ R0
 IcF9AO:081]VlAL=kA>c9>0
 R1
 R2
-R3
+w1687051888
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit.v
 L0 7
@@ -115,13 +115,13 @@ R10
 R11
 n@a@l@u_8bit
 vALU_8bit_tb
-R0
+R13
 !i10b 1
 !s100 8=EjgSCid[BLW55NTh2131
 ICnjdV581`SM7z_NZCYidW3
 R1
 R2
-Z17 w1686190019
+Z19 w1686190019
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit_tb.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit_tb.v
 L0 4
@@ -129,7 +129,7 @@ R6
 r1
 !s85 0
 31
-Z18 !s108 1687032131.000000
+R16
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/ALU_8bit_tb.v|
 !i113 1
@@ -137,13 +137,13 @@ R10
 R11
 n@a@l@u_8bit_tb
 vcontroller_fsm
-Z19 !s110 1687032131
+Z20 !s110 1687121642
 !i10b 1
 !s100 9I?`j8Si3M=^CnV1WTjGI2
 Ic`boaW9h]477AX=cFOE`X3
 R1
 R2
-R3
+w1687051906
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm.v
 L0 5
@@ -151,14 +151,14 @@ R6
 r1
 !s85 0
 31
-R18
+Z21 !s108 1687121642.000000
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm.v|
 !i113 1
 R10
 R11
 vcontroller_fsm_tb
-R19
+R13
 !i10b 1
 !s100 lWA3Yc1]cRLPk5hZ2?6lc3
 IgcgKYSY9aa4`X_68M;]aD2
@@ -172,20 +172,83 @@ R6
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/controller_fsm_tb.v|
 !i113 1
 R10
 R11
-vmcu_8bit
-R19
+vinstruction_memory
+R20
 !i10b 1
-!s100 L_WY=YoY<z<MTg>:`^mjJ2
-I^`V>P8HQZCmedUPbCzW0Q0
+!s100 3DcA:Qo43mJ^bH1L2S=HH2
+Ie7bc626Im=P@aT@1_VGNn1
 R1
 R2
-w1687031826
+w1687121204
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory.v
+L0 5
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory.v|
+!i113 1
+R10
+R11
+vinstruction_memory_tb
+!s110 1687121208
+!i10b 1
+!s100 PghI=hEoQj4fJO:A43`M51
+I>R9[of>7=a@Eaf0<VPh::2
+R1
+R2
+w1687120698
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory_tb.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory_tb.v
+L0 4
+R6
+r1
+!s85 0
+31
+!s108 1687121208.000000
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_memory_tb.v|
+!i113 1
+R10
+R11
+vinstruction_register
+R20
+!i10b 1
+!s100 XXB5i2P4HNJe8>]bghBdS1
+Im4OcTc?Z9FRml2BP8BOd92
+R1
+R2
+Z22 w1687045299
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_register/instruction_register.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_register/instruction_register.v
+L0 3
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_register/instruction_register.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/instruction_register/instruction_register.v|
+!i113 1
+R10
+R11
+vmcu_8bit
+R20
+!i10b 1
+!s100 M0^<>B6e3H1df^o5Pg;5_2
+IP<bT9IQb9ie3dU<bXGK<g1
+R1
+R2
+w1687121607
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level.v
 L0 3
@@ -193,14 +256,35 @@ R6
 r1
 !s85 0
 31
-R18
+R21
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level.v|
 !i113 1
 R10
 R11
+vmcu_8bit_top_level_tb
+R20
+!i10b 1
+!s100 5D?VE6klG4[B@4?X>;=?m0
+IiRcK[5^]>;iH?4eeHdI[83
+R1
+R2
+w1687121510
+8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level_tb.v
+FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level_tb.v
+L0 41
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/mcu_8bit_top_level_tb.v|
+!i113 1
+R10
+R11
 vnbit_two_one_mux
-R19
+R20
 !i10b 1
 !s100 m=fmj4D:?@VX5jj0XGAMX0
 I3bQ8CQH?jnJFY]Zof[zmW0
@@ -214,20 +298,20 @@ R6
 r1
 !s85 0
 31
-R18
+R21
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux.v|
 !i113 1
 R10
 R11
 vnbit_two_one_mux_tb
-R19
+R13
 !i10b 1
 !s100 ]Vb:?oLA^j=M2nfVIReVP2
 InT3@Xgz=Ni;dFHJ`n]RkV2
 R1
 R2
-R17
+R19
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux_tb.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux_tb.v
 L0 6
@@ -235,41 +319,41 @@ R6
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux_tb.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/nbit_two_one_mux_tb.v|
 !i113 1
 R10
 R11
 vprogram_counter
-R19
+R0
 !i10b 1
-!s100 W=1h52:;L`ebN0zRIISg^2
-IbUa?nEO9H_9bEdhZ;Emez0
+!s100 Y66;8>jBc_oHADB>1B@UR2
+IKgfkE8m0jPM975P?m<eB^2
 R1
 R2
-R3
+R22
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/program_counter.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/program_counter.v
-L0 6
+L0 9
 R6
 r1
 !s85 0
 31
-R18
+R7
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/program_counter.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/program_counter.v|
 !i113 1
 R10
 R11
 vregister_unit
-R19
+R0
 !i10b 1
-!s100 80o_KRjFh]cH1GI27;ozF0
-IV5cXl@D5m_=E5f2]=I6S?1
+!s100 8o_j7iiFV3`G21eiF[:RJ2
+IiG2TUz7Cgk_Z^D1n6CNno0
 R1
 R2
-R3
+R22
 8C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/registers.v
 FC:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/registers.v
 L0 2
@@ -277,7 +361,7 @@ R6
 r1
 !s85 0
 31
-R18
+R7
 !s107 C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/registers.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/austi/OneDrive/Documents/SyracuseUniversity/CSE664/project/top_level/SOC_CSE664/registers.v|
 !i113 1

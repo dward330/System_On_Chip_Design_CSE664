@@ -15,7 +15,7 @@
 ** wire_ = Signal Direct Connection/Wire
 ** g_ = generic
 ** c_ = constant
-** s_ = state
+** s_ = state   
 ** i_ = input 
 ** o_ = output
 ** Suffixes
@@ -41,10 +41,11 @@
 module mcu_8bit_top_level_tb(); 
 
     // Declare testbench input variables 
-    reg r_Clk, r_Reset, r_resetPC;
+    reg r_Clk, r_Reset;
+    reg [7:0] r_resetPC;
 
     // Declare testbench output variables
-    wire wire_currentPC;
+    wire [7:0] wire_currentPC;
 
     // Set period to 10ns
     always #5 r_Clk =~ r_Clk;

@@ -5,8 +5,8 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	// Input / Output nets of module
 	input Clk;
 	input Reset;
-	input resetPC;
-	output currentPC;
+	input [7:0] resetPC;
+	output [7:0] currentPC;
 	
 	/* Internal nets:
 	 * These are all of the connections between different
@@ -56,7 +56,11 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	*/
 	  
 	// 1. Instruction memory (TODO)
-
+	instruction_memory imm
+	(
+		.pc_address(currentPC), 
+		.out(instruction)
+	);
 	
 	// 1.1 Instruction Reg 
 	instruction_register instr_reg
