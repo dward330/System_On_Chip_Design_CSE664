@@ -6,7 +6,7 @@ case(count)
 
 8'b00000010: out = 8'b11010011; //002 IMM 3 to ACC (ACC = 3)
 
-8'b00000100: out = 8'b01010011; //004 IMM 0 to ACC (ACC = 0)
+8'b00000100: out = 8'b01010000; //004 IMM 0 to ACC (ACC = 0)
 
 8'b00000110: out = 8'b01111010; //006 Branch to IMM 10 if ACC = 0 (line 010) (should be taken)
 
