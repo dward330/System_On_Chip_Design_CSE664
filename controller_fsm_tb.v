@@ -29,10 +29,13 @@
 **
 **    Rev         Author              		Date
 ** -----------------------------------------------------------------------------
+**    1.2         A. Benedetti                  6-18-2023
+**                Added branch control and reset
+**  
 **    1.1         A. Benedetti, N. Lyons         6-4-2023
 **                Fixed default nets, cleanup
 **
-**    1.0         N. Lyons            		23-May-2023
+**    1.0         N. Lyons            		    23-May-2023
 **                Initial delivery
 **
 *******************************************************************************/
@@ -44,7 +47,7 @@
 module controller_fsm_tb(); 
 
     // Declare testbench input variables 
-    reg r_Clk, r_Z, r_C, r_CLB;
+    reg r_Clk, r_Z, r_C, r_reset;
     reg [3:0] r_Opcode;
 
     // Declare testbench output variables
@@ -82,7 +85,7 @@ module controller_fsm_tb();
         .Clk(r_Clk),
         .Z(r_Z),
         .C(r_C),
-        .CLB(r_CLB)
+        .reset(r_reset)
     );
 
 
@@ -94,9 +97,9 @@ module controller_fsm_tb();
         r_Clk = 0;
         r_Z = 0;
         r_C = 0;
-        r_CLB = 0;
+        r_reset = 1;
         r_Opcode = c_ADD; 
-
+        #20 // Hold in reset for 2 clocks
 
 		// Test ALU related opcodes for 10 cycles
 		r_Opcode = c_ADD;      

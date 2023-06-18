@@ -15,8 +15,13 @@ module controller_fsm(
     input wire Clk,              //! Clock signal
     input wire Z,                //! Zero bit
     input wire C,                //! Carry bit
-    input wire CLB               //! TODO: WHAT IS THIS? - Replace with reset
+    input wire reset             //! Asynchronous active high reset
     );
+
+	// internal net to keep track if prev instruction wrote to ACC
+	// If previous instruction wrote to ACC, and current instruction is 
+	// JUMP, then we can evaluate based on the Z flag if the PC needs to jump
+	reg [3:0] previous_opcode;
     
 parameter   ADD         = 4'b0001,      // ACC = REG + ACC
             SUB         = 4'b0010,      // ACC = REG - ACC
@@ -28,17 +33,17 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
             IMM_TO_ACC  = 4'b1101,      // STORE IMM IN ACC
             JMPZ_REG    = 4'b0110,      // IF ACC IS 0, SET PC TO VALUE IN REG
             JMPZ_IMM    = 4'b0111,      // IF ACC IS 0, SET PC TO VALUE OF IMM
-            JMPC_REG    = 4'b1000,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE IN REG
-            JMPC_IMM    = 4'b1010,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE OF IMM
+            JMPNZ_REG   = 4'b1000,      // IF ACC != 0 (!Z), SET PC TO VALUE IN REG
+            JMPNZ_IMM   = 4'b1010,      // IF ACC != 0 (!Z), SET PC TO VALUE OF IMM
             NOP         = 4'b0000,      // NO OP (PC = PC + 1)
             HALT        = 4'b1111;      // HALT PC (PC = PC)
     
     
     //! Case statement for setting control signals
-    always@(Clk) begin
+    always@(Clk or reset) begin
     
 	// Signals vary by opcode
-        case(Opcode)
+    case(Opcode)
         
 	// ALU Related Opcodes
         ADD, SUB, NOR, SHFR, SHFL : begin
@@ -112,8 +117,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		SelALU  <= JMPZ_IMM;
         end
         
-	// Jump to address in register if carry is set
-        JMPC_REG : begin
+	// Jump to address in register if !Z
+        JMPNZ_REG : begin
 		LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
 		IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 		SelPC   <= 1'b0;   // Load value from register instead of basic increment
@@ -124,8 +129,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		SelALU  <= JMPC_REG;
         end
            
-	// Jump to address of immediate if carry is set
-        JMPC_IMM : begin
+	// Jump to address of immediate if !Z
+        JMPNZ_IMM : begin
 		LoadIR  <= 1'b1;   // Load next instruction from IMem to IR      	
 		IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 		SelPC   <= 1'b1;   // Load immediate to jump to
