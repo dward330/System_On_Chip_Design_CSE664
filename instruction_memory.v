@@ -23,6 +23,8 @@ module instruction_memory(
         8'b00001000: out <= 8'b01010001; //008 ACC to reg 1 (Reg 1 = 1)
 
         8'b00001010: out <= 8'b00010000; //010 Add reg 0 to ACC (Reg 1 + ACC 3 = ACC 4)
+        
+        8'b00001100: out = 8'b11111111; //012 HALT; end of program
 
         default: out <= 8'b00000000; // Default to no-op
 
