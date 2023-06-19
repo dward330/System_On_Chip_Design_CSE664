@@ -100,6 +100,7 @@ module controller_fsm_tb();
         r_reset = 1;
         r_Opcode = c_ADD; 
         #20 // Hold in reset for 2 clocks
+        r_reset = 0;
 
 		// Test ALU related opcodes for 10 cycles
 		r_Opcode = c_ADD;      

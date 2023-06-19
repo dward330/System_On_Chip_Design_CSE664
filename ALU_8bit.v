@@ -67,6 +67,7 @@ parameter [3:0] 	NOP 	= 4'b0000, // No-operation
 			end
 			
 			default : begin 
+				#5 // Update to default on neg clock edge to allow for controller to check flag
 				alu_out = 0;
 				alu_carry_out = 1'b0;
 				alu_zero_flag = 1'b0;

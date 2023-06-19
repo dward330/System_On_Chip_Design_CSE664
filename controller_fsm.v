@@ -44,7 +44,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
     
     
     //! Case statement for setting control signals
-    always@(Clk or reset) begin
+    always@(posedge Clk or posedge reset) begin
     
 	// Asynchronous active high reset
 	if(reset) begin
@@ -123,7 +123,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 				LoadAcc <= 1'b0;   // Do not update ACC
 				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
 				SelALU  <= JMPZ_REG;
-			else 
+			end
+			else begin 
 				// Same as No-Op case
 				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
 				IncPC   <= 1'b1;    // Increment to next instruction only
@@ -146,7 +147,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 				LoadAcc <= 1'b0;  // Do not update ACC
 				SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
 				SelALU  <= JMPZ_IMM;
-			else 
+			end
+			else begin
 				// Same as No-Op case
 				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
 				IncPC   <= 1'b1;    // Increment to next instruction only
@@ -170,7 +172,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 				LoadAcc <= 1'b0;   // Do not update ACC 
 				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
 				SelALU  <= JMPNZ_REG;
-			else 
+			end
+			else begin
 				// Same as No-Op case
 				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
 				IncPC   <= 1'b1;    // Increment to next instruction only
@@ -194,7 +197,8 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 				LoadAcc <= 1'b0;   // Do not update ACC
 				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
 				SelALU  <= JMPNZ_IMM;   
-			else 
+			end
+			else begin
 				// Same as No-Op case
 				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
 				IncPC   <= 1'b1;    // Increment to next instruction only
@@ -246,12 +250,14 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		endcase
 		
 		end // End of else
-	
-	end // End of always
 
 	// Save opcode as previos, use small delay to preserve prev
 	// during evaluation
-    #2 assign previous_opcode = Opcode;
+    	#5 previous_opcode = Opcode;
     
+	
+	end // End of always
+
+	
     
 endmodule
