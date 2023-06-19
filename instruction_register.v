@@ -1,7 +1,15 @@
 `timescale 1ns / 1ps
 
-module instruction_register(clock, reset, instruction, opcode, data_out, LoadIR);
-
+// Description
+// ! Register Module to transfrom instruction into opcode (sent to controller) and data components. 
+module instruction_register(
+    input clock, //! Clock signal (Positive edge triggered).
+    input reset, //! Signal to clear and set opcode and data out back to 0.
+    input [7:0] instruction, //! Instruction received from memory.
+    output [3:0] opcode, //! Opcode from the instruction.
+    output [3:0] data_out, //! Data component from the instruction.
+    input LoadIR //! Signal to load and transform instruction into opcode and data components.
+    );
 
     // necessities 
     input clock;
@@ -13,11 +21,8 @@ module instruction_register(clock, reset, instruction, opcode, data_out, LoadIR)
 
     // opcode 
     output reg [3:0] opcode;
-    //reg [3:0] tmp_data;
-    //reg [3:0] tmp_opcode;
-
-    // instruction received from memory  
-    input [7:0] instruction;
+    reg [3:0] tmp_data;
+    reg [3:0] tmp_opcode;
 
     // if a new instruction is sent to the register 
     always @(posedge clock or posedge reset)
