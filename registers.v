@@ -21,10 +21,10 @@ parameter register_size = 8;
 integer i;
 
 // 16 -> 8 bit registers
-reg [register_size-1:0] registers [0:register_count-1];
+//reg [register_size-1:0] registers [0:register_count-1];
 
 // Temporary variable to hold data value stored in addressed register slot
-reg [register_size-1:0] datatogoout;
+//reg [register_size-1:0] datatogoout;
 
 //Only run when we detect a positive clock edge rise or a positive reset edge rise
 always @(posedge clock or posedge reset) begin
