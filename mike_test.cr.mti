@@ -1,0 +1,124 @@
+C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/nbit_two_one_mux_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/nbit_two_one_mux_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module nbit_two_one_mux_tb
+
+Top level modules:
+	nbit_two_one_mux_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/accumulator_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/accumulator_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module acc_simple_tb
+-- Compiling module acc_v1_tb
+
+Top level modules:
+	acc_simple_tb
+	acc_v1_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/ALU_8bit_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/ALU_8bit_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ALU_8bit_tb
+
+Top level modules:
+	ALU_8bit_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/controller_fsm_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/controller_fsm_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module controller_fsm_tb
+
+Top level modules:
+	controller_fsm_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/registers.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/registers.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module register_unit
+
+Top level modules:
+	register_unit
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/accumulator.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/accumulator.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module acc_simple
+-- Compiling module acc
+
+Top level modules:
+	acc_simple
+	acc
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/ALU_8bit.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/ALU_8bit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ALU_8bit
+
+Top level modules:
+	ALU_8bit
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/nbit_two_one_mux.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/nbit_two_one_mux.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module nbit_two_one_mux
+
+Top level modules:
+	nbit_two_one_mux
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/mcu_8bit_top_level_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/mcu_8bit_top_level_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mcu_8bit_top_level_tb
+
+Top level modules:
+	mcu_8bit_top_level_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_register/instruction_register.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_register/instruction_register.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module instruction_register
+
+Top level modules:
+	instruction_register
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/mcu_8bit_top_level.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/mcu_8bit_top_level.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mcu_8bit
+
+Top level modules:
+	mcu_8bit
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/registersTB.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/registersTB.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module TBRegisters
+
+Top level modules:
+	TBRegisters
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/program_counter.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/program_counter.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module program_counter
+
+Top level modules:
+	program_counter
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_memory_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_memory_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module instruction_memory_tb
+
+Top level modules:
+	instruction_memory_tb
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/controller_fsm.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/controller_fsm.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module controller_fsm
+
+Top level modules:
+	controller_fsm
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_memory.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/instruction_memory.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module instruction_memory
+
+Top level modules:
+	instruction_memory
+
+} {} {}} C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/program_counter_tb.v {1 {vlog -work work -stats=none C:/Users/mdotk/Dropbox/Documents/School/ModelSim/SOC_CSE664/program_counter_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module program_counter_tb
+
+Top level modules:
+	program_counter_tb
+
+} {} {}}
