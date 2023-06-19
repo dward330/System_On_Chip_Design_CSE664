@@ -22,6 +22,10 @@ parameter [3:0] 	NOP 	= 4'b0000, // No-operation
 			SHFR 	= 4'b1011; // Bitwise shift A right
 				
 				
+	initial begin
+	alu_zero_flag = 1'b1;
+	end
+				
 	//! The ALU outputs change anytime the inputs change (combinational logic).
 	always@(alu_a_in or alu_b_in or alu_select)
 	begin

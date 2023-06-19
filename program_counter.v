@@ -19,11 +19,17 @@ module program_counter(
 		if(reset==1) begin //if the reset line is high, zero the counter
 			count <= 0;
 		end
-		else if(LoadPC) begin //if the set is high, load a new value into the counter
-			count <= new_count;
-		end
+		
 		else if(IncPC) begin // if increment is high, add one to the counter
 			count <= count + 2'b10;
+		end
+	end
+	
+	// always to load new PC
+	always @ (posedge clk) begin
+	#5 // Wait for control signals to update new PC
+	   if(LoadPC) begin //if the set is high, load a new value into the counter
+			count <= new_count;
 		end
 	end
 

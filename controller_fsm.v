@@ -108,7 +108,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address in REG if zero is set
 		JMPZ_REG : begin
-			if(Z == 1'b0) begin
+			if(Z == 1'b1) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b0;   // Load address to jump to from register
@@ -132,7 +132,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		end
 		// Jump to address of immediate if zero is set
 		JMPZ_IMM : begin
-			if(Z == 1'b0) begin
+			if(Z == 1'b1) begin
 				LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
 				IncPC   <= 1'b0;  // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b1;  // Load immediate to jump to
@@ -157,7 +157,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address in register if !Z
 		JMPNZ_REG : begin
-			if(Z != 1'b0) begin
+			if(Z == 1'b0) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b0;   // Load value from register instead of basic increment
@@ -182,7 +182,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address of immediate if !Z
 		JMPNZ_IMM : begin
-			if(Z != 1'b0) begin
+			if(Z == 1'b0) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR      	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b1;   // Load immediate to jump to
