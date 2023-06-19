@@ -49,7 +49,7 @@ initial begin
 	// Update instruction with loading IR
 	#10
 	LoadIR 	= 1;
-    ins 	= 8'b01001111;
+    ins 	= 8'b01001110;
     $display("data: 	%b", data);
     $display("opcode: 	%b", opcode);
 	
@@ -62,7 +62,7 @@ initial begin
 	
 	// Update instruction without loading IR
 	#10
-	LoadIR 	= 0;
+	LoadIR 	= 1;
     ins 	= 8'b00111100;
     $display("data: 	%b", data);
     $display("opcode: 	%b", opcode);

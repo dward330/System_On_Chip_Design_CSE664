@@ -6,23 +6,21 @@ module instruction_register(
     input clock, //! Clock signal (Positive edge triggered).
     input reset, //! Signal to clear and set opcode and data out back to 0.
     input [7:0] instruction, //! Instruction received from memory.
-    output [3:0] opcode, //! Opcode from the instruction.
-    output [3:0] data_out, //! Data component from the instruction.
+    output reg [3:0] opcode, //! Opcode from the instruction.
+    output reg [3:0] data_out, //! Data component from the instruction.
     input LoadIR //! Signal to load and transform instruction into opcode and data components.
     );
 
     // necessities 
-    input clock;
-    input reset;
-    input LoadIR;
+    //input clock;
+    //input reset;
+    //input LoadIR;
 
     // non-opcode 4 bits  
-    output reg [3:0] data_out;
+    //output reg [3:0] data_out;
 
     // opcode 
-    output reg [3:0] opcode;
-    reg [3:0] tmp_data;
-    reg [3:0] tmp_opcode;
+    //output reg [3:0] opcode;
 
     // if a new instruction is sent to the register 
     always @(posedge clock or posedge reset)
