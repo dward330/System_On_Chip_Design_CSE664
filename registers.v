@@ -5,10 +5,10 @@
 // Description
 //! A register module that allows users to store up to 16 numbers that are 8-bits long.
 module register_unit (
-	reset, //! Signal to clear all 16 register values and set value to 0.
-	clock, //! Clock Signal.
-	load, //! Signal to update register.
-	addr, //! Address of the register slot to update or read from.
+	input wire reset, //! Signal to clear all 16 register values and set value stored back to 0.
+	input wire clock, //! Clock signal.
+	input wire load, //! Signal to update register.
+	input wire[3:0] addr, //! Address of the register slot to update or read from.
 	data_out, //! Value stored in register slot, addressed by the "addr" 4-bit wires.
 	data_in //! Value to update register slot to, addressed by the "addr" 4-bit wires. Requires load and clock signal to be high.
 	);
@@ -31,10 +31,6 @@ output [register_size-1:0] data_out;
 
 // Value to update register slot too
 input wire [register_size-1:0] data_in;
-input wire clock, reset, load;
-
-// Address(Register Slot) to read or update
-input wire[3:0] addr;
 
 //Only run when we detect a positive clock edge rise or a positive reset edge rise
 always @(posedge clock or posedge reset) begin
