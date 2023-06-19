@@ -66,8 +66,8 @@ module controller_fsm_tb();
                 c_IMM_TO_ACC  = 4'b1101,      // STORE IMM IN ACC
                 c_JMPZ_REG    = 4'b0110,      // IF ACC IS 0, SET PC TO VALUE IN REG
                 c_JMPZ_IMM    = 4'b0111,      // IF ACC IS 0, SET PC TO VALUE OF IMM
-                c_JMPC_REG    = 4'b1000,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE IN REG
-                c_JMPC_IMM    = 4'b1010,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE OF IMM
+                c_JMPNZ_REG    = 4'b1000,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE IN REG
+                c_JMPNZ_IMM    = 4'b1010,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE OF IMM
                 c_NOP         = 4'b0000,      // NO OP (PC = PC + 1)
                 c_HALT        = 4'b1111;      // HALT PC (PC = PC)
 
@@ -125,23 +125,47 @@ module controller_fsm_tb();
 		r_Opcode = c_IMM_TO_ACC;      
 		#100;
 
-		// Test jump register opcode for 10 cycles
+		// Test jump register opcode for 10 cycles with zero set
+        r_Z = 1;
+		r_Opcode = c_JMPZ_REG;      
+		#100;
+
+        // Test jump register opcode for 10 cycles with zero NOT set (should no-op)
+        r_Z = 0;
 		r_Opcode = c_JMPZ_REG;      
 		#100;
 		
-		// Test jump immediate opcode for 10 cycles
+		// Test jump immediate opcode for 10 cycles with zero set
+		r_Z = 1;
+        r_Opcode = c_JMPZ_IMM;      
+		#100;
+
+        // Test jump immediate opcode for 10 cycles with zero NOT set (should no-op)
+        r_Z = 0;
 		r_Opcode = c_JMPZ_IMM;      
 		#100;
 
-		// Test jump register opcode for 10 cycles
-		r_Opcode = c_JMPC_REG;      
-		#100;
-		
-		// Test jump immediate opcode for 10 cycles
-		r_Opcode = c_JMPC_IMM;      
+		// Test jump register opcode for 10 cycles with zero set (should no-op)
+        r_Z = 1;
+		r_Opcode = c_JMPNZ_REG;      
 		#100;
 
-		// Test nop opcode for 10 cycles
+        // Test jump register opcode for 10 cycles with zero NOT set (should jump)
+        r_Z = 0;
+		r_Opcode = c_JMPNZ_REG;      
+		#100;
+		
+		// Test jump immediate opcode for 10 cycles with zero set (should no-op)
+        r_Z = 1;
+		r_Opcode = c_JMPNZ_IMM;      
+		#100;
+
+        // Test jump immediate opcode for 10 cycles with zero NOT set (should jump)
+        r_Z = 0;
+		r_Opcode = c_JMPNZ_IMM;      
+		#100;
+
+		// Test nop opcode for 10 cycles 
 		r_Opcode = c_NOP;      
 		#100;
 
