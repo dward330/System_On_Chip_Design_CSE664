@@ -13,7 +13,7 @@ module instruction_memory_tb();
     instruction_memory imem
     (
         .pc_address(r_address),
-        .out_instruction(wire_instruction)    
+        .out(wire_instruction)    
     );
 
     // Test stimulus
