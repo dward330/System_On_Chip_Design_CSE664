@@ -84,11 +84,10 @@ always @(posedge clock or posedge reset)	// at posedge of clock or reset=1
 
 begin
 
-#5 // delay to let ctrl signal propagate / write ALU result to ACC
+#15 // delay to let ctrl signal propagate / write ALU result to ACC
 	if (reset)				// if reset = 1
 		accumulator <= 0;		// reset accumulator to 0
 	else if (update)
-	   #10 // Required to write to register after ALU op
 		accumulator <= in; // store value in accumulator if change bit = 1
 end
 
