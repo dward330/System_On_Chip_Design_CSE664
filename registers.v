@@ -9,8 +9,8 @@ module register_unit (
 	input wire clock, //! Clock signal.
 	input wire load, //! Signal to update register.
 	input wire[3:0] addr, //! Address of the register slot to update or read from.
-	data_out, //! Value stored in register slot, addressed by the "addr" 4-bit wires.
-	data_in //! Value to update register slot to, addressed by the "addr" 4-bit wires. Requires load and clock signal to be high.
+	output [7:0] data_out, //! Value stored in register slot, addressed by the "addr" 4-bit wires.
+	input wire [7:0] data_in //! Value to update register slot to, addressed by the "addr" 4-bit wires. Requires load and clock signal to be high.
 	);
 
 //register size
@@ -25,12 +25,6 @@ reg [register_size-1:0] registers [0:register_count-1];
 
 // Temporary variable to hold data value stored in addressed register slot
 reg [register_size-1:0] datatogoout;
-
-// Value stored in the addressed register slot
-output [register_size-1:0] data_out;
-
-// Value to update register slot too
-input wire [register_size-1:0] data_in;
 
 //Only run when we detect a positive clock edge rise or a positive reset edge rise
 always @(posedge clock or posedge reset) begin
