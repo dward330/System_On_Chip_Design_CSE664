@@ -4,6 +4,7 @@
 
 // Description
 //! A register module that allows users to store up to 16 numbers that are 8-bits long.
+`timescale 1ns / 1ps
 module register_unit (
 	input wire reset, //! Signal to clear all 16 register values and set value stored back to 0.
 	input wire clock, //! Clock signal.
