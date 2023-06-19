@@ -31,6 +31,11 @@
 ** v1.1
 **
 *******************************************************************************/
+// Description
+//! A register in which intermediate arithmetic logic unit results are stored. 
+//! This simple 8-bit accumulator's output will continuously grow by increments of the input until reset. 
+//! 
+//! Note - Overflow is not handled
 
 module acc (
 	output [7 : 0] out, //! Value stored in the register, to be returned to ALU.
