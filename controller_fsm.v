@@ -18,13 +18,6 @@ module controller_fsm(
     input wire reset             //! Asynchronous active high reset
     );
 
-	// internal net to keep track if prev instruction wrote to ACC
-	// If previous instruction wrote to ACC, and current instruction is 
-	// JUMP, then we can evaluate based on the Z flag if the PC needs to jump
-	reg [3:0] previous_opcode;
-
-	// Init prev opcode to 0
-	initial previous_opcode = 0;
     
 // Opcode parameters
 parameter   ADD         = 4'b0001,      // ACC = REG + ACC
@@ -114,7 +107,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address in REG if zero is set
 		JMPZ_REG : begin
-			if(Z == 1'b1) begin
+			if(Z == 1'b0) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b0;   // Load address to jump to from register
@@ -138,7 +131,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		end
 		// Jump to address of immediate if zero is set
 		JMPZ_IMM : begin
-			if(Z == 1'b1) begin
+			if(Z == 1'b0) begin
 				LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
 				IncPC   <= 1'b0;  // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b1;  // Load immediate to jump to
@@ -163,7 +156,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address in register if !Z
 		JMPNZ_REG : begin
-			if(Z != 1'b1) begin
+			if(Z != 1'b0) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b0;   // Load value from register instead of basic increment
@@ -188,7 +181,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 			
 		// Jump to address of immediate if !Z
 		JMPNZ_IMM : begin
-			if(Z != 1'b1) begin
+			if(Z != 1'b0) begin
 				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR      	
 				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
 				SelPC   <= 1'b1;   // Load immediate to jump to
@@ -250,11 +243,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		endcase
 		
 		end // End of else
-
-	// Save opcode as previos, use small delay to preserve prev
-	// during evaluation
-    	#5 previous_opcode = Opcode;
-    
+   
 	
 	end // End of always
 

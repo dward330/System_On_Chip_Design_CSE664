@@ -23,10 +23,10 @@ instruction_register uut
 	(
         .clock(clock),
         .reset(reset),
-		.instruction(ins),
-		.opcode(opcode),
+	.instruction(ins),
+	.opcode(opcode),
         .data_out(data),
-		.LoadIR(LoadIR)
+	.LoadIR(LoadIR)
 	);
 	
 	// Oscillating clock
@@ -34,7 +34,7 @@ instruction_register uut
 
 // simulate clock 
 initial begin
-	clock 	= 0;
+	clock 	= 1;
 	reset 	= 0;
 	ins 	= 0;
 	LoadIR 	= 0;

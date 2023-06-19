@@ -17,7 +17,7 @@ module mcu_8bit(
 	 */
 	 
 	// 1. Control signals
-	wire LoadIR, IncPC, SelPC, LoadPC, LoadReg, LoadAcc, CLB;
+	wire LoadIR, IncPC, SelPC, LoadPC, LoadReg, LoadAcc;
 	wire [1:0] SelAcc;
 	wire [3:0] SelALU;
 	

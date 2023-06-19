@@ -63,10 +63,10 @@ module mcu_8bit_top_level_tb();
     initial begin
         r_Clk = 0;
         r_Reset = 1;
-        r_resetPC = 1;
+        r_resetPC = 0;
         #100                                       
 
-		// Test storing register in acc opcode for 100 cycles
+	// Let clock run to stimulate program in instruction memory
         r_Reset = 0;
         r_resetPC = 0;    
 		#1000;
