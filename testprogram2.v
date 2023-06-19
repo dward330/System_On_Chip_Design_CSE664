@@ -12,7 +12,7 @@ case(count)
 
 8'b00001000: out = 8'b01010001; //008 ACC to reg 1 (Reg 1 = 1)
 
-8'b00001010: out = 8'b00010000; //010 Add reg 0 to ACC (Reg 1 + ACC 3 = ACC 4)
+8'b00001010: out = 8'b00010000; //010 Add reg 0 to ACC (Reg 3 + ACC 1 = ACC 4)
 
 8'b00001100: out = 8'b01010010; //012 ACC to reg 2 (Reg 2 = 4)
 
@@ -44,7 +44,7 @@ case(count)
 
 8'b00101000: out = 8'b01100110; //040 Branch to value of reg 6 if ACC = 0 (should not branch)
 
-8'b00101010: out = 8'b10000110; //042 Branch to 6 if ACC < 0 (should not branch)
+8'b00101010: out = 8'b00000000; //042 NOP
 
 8'b00101100: out = 8'010000100; //044 Register 4 to ACC (ACC = 252)
 
