@@ -1,20 +1,18 @@
-// Description
 // Module: program_counter.v 
-// Program Counter - Register that contains the adress of the instruction bieng executed
-// It counts the instructions opcodes from 0000 to 1111 and it signals the memory address of next instruction to be fetched and executed
 
 //set timescale to nanoseconds
 `timescale 1ns / 1ps
 
-module program_counter(clk, reset, LoadPC, IncPC, new_count, count);
-	
-	//declare input/ output variables
-	input clk; //!synchronous clock
- 	input reset; //!synchronous reset when active high
- 	input LoadPC; //!loads new_count(new_PC = PC) when active high
-	input IncPC; //!increments the counter (PC + 1 = PC) when active high
-	input [7:0] new_count; //!new input value to set to the counter (new_PC)
-	output reg [7:0] count; //!output address of the program counter (PC)
+// Description
+//! Register that contains the address of the instruction to be executed. Counts the instructions opcodes from 0000 to 1111 and it signals the memory address of next instruction to be fetched and executed.
+module program_counter(
+	input clk, //! cLock signal.
+	input reset, //! Signal to clear and set address back to 8'b00000000.
+	input LoadPC, //! Signal to manually set program address. 
+	input IncPC, //! Signal to automatically increment program address by 1 (2'b10)
+	input [7:0] new_count, //! Address to manually set program address to.
+	output reg [7:0] count //! Current address of the program
+	);
 
 	//clocked operation
 	always @ (posedge clk or posedge reset) begin
