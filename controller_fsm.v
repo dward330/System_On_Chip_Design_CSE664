@@ -15,9 +15,18 @@ module controller_fsm(
     input wire Clk,              //! Clock signal
     input wire Z,                //! Zero bit
     input wire C,                //! Carry bit
-    input wire CLB               //! TODO: WHAT IS THIS? - Replace with reset
+    input wire reset             //! Asynchronous active high reset
     );
+
+	// internal net to keep track if prev instruction wrote to ACC
+	// If previous instruction wrote to ACC, and current instruction is 
+	// JUMP, then we can evaluate based on the Z flag if the PC needs to jump
+	reg [3:0] previous_opcode;
+
+	// Init prev opcode to 0
+	initial previous_opcode = 0;
     
+// Opcode parameters
 parameter   ADD         = 4'b0001,      // ACC = REG + ACC
             SUB         = 4'b0010,      // ACC = REG - ACC
             NOR         = 4'b0011,      // ACC = !(REG | ACC)
@@ -28,116 +37,18 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
             IMM_TO_ACC  = 4'b1101,      // STORE IMM IN ACC
             JMPZ_REG    = 4'b0110,      // IF ACC IS 0, SET PC TO VALUE IN REG
             JMPZ_IMM    = 4'b0111,      // IF ACC IS 0, SET PC TO VALUE OF IMM
-            JMPC_REG    = 4'b1000,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE IN REG
-            JMPC_IMM    = 4'b1010,      // IF ACC < 0 (CARRY IS SET), SET PC TO VALUE OF IMM
+            JMPNZ_REG   = 4'b1000,      // IF ACC != 0 (!Z), SET PC TO VALUE IN REG
+            JMPNZ_IMM   = 4'b1010,      // IF ACC != 0 (!Z), SET PC TO VALUE OF IMM
             NOP         = 4'b0000,      // NO OP (PC = PC + 1)
             HALT        = 4'b1111;      // HALT PC (PC = PC)
     
     
     //! Case statement for setting control signals
-    always@(Clk) begin
+    always@(posedge Clk or posedge reset) begin
     
-	// Signals vary by opcode
-        case(Opcode)
-        
-	// ALU Related Opcodes
-        ADD, SUB, NOR, SHFR, SHFL : begin
-		LoadIR  <= 1'b1;  // Load next instruction from IMem to IR        	
-		IncPC   <= 1'b1;  // Increment to next instruction only
-		SelPC   <= 1'bx;  // Mux output does not matter for this case
-		LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
-		LoadReg <= 1'b0;  // Do not update register file.
-		LoadAcc <= 1'b1;  // Update value stored in ACC
-		SelAcc  <= 2'b11; // Load output of ALU into ACC
-		SelALU  <= Opcode; 
-        end
-        
-	// Put value from Reg in ACC
-        REG_TO_ACC : begin
-		LoadIR  <= 1'b1;  // Load next instruction from IMem to IR          	
-		IncPC   <= 1'b1;  // Increment to next instruction only
-		SelPC   <= 1'bx;  // Mux output does not matter for this case
-		LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
-		LoadReg <= 1'b0;  // Do not update register file.
-		LoadAcc <= 1'b1;  // Update value stored in ACC
-		SelAcc  <= 2'b01; // SecAcc0 = 1 (B), SelAcc1 = 0 (A)
-		SelALU  <= Opcode;
-        end
-        
-	// Put value from ACC into a Reg
-        ACC_TO_REG : begin
-		LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
-		IncPC   <= 1'b1;  // Increment to next instruction only
-		SelPC   <= 1'bx;  // Mux output does not matter for this case
-		LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
-		LoadReg <= 1'b1;  // Update register value!
-		LoadAcc <= 1'b0;  // Do not update ACC
-		SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
-		SelALU  <= ACC_TO_REG;
-        end
-        
-	// Load immediate into ACC
-        IMM_TO_ACC : begin
-		LoadIR  <= 1'b1;  // Load next instruction from IMem to IR        	
-		IncPC   <= 1'b1;  // Increment to next instruction only
-		SelPC   <= 1'bx;  // Mux output does not matter for this case
-		LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
-		LoadReg <= 1'b0;  // Do not update register file.
-		LoadAcc <= 1'b1;  // Update ACC
-		SelAcc  <= 2'b00; // SecAcc0 = 0 (A), SelAcc1 = 0 (A)
-		SelALU  <= IMM_TO_ACC;
-        end      
-        
-	// Jump to address in REG if zero is set
-        JMPZ_REG : begin
-		LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
-		IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
-		SelPC   <= 1'b0;   // Load address to jump to from register
-		LoadPC  <= 1'b1;   // Load value from register instead of basic increment
-		LoadReg <= 1'b0;   // Do not update register file.
-		LoadAcc <= 1'b0;   // Do not update ACC
-		SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
-		SelALU  <= JMPZ_REG;
-        end
-        
-	// Jump to address of immediate if zero is set
-        JMPZ_IMM : begin
-		LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
-		IncPC   <= 1'b0;  // Jump instruction, use LoadPC signal to use value from mux
-		SelPC   <= 1'b1;  // Load immediate to jump to
-		LoadPC  <= 1'b1;  // Load immediate value instead of basic increment
-		LoadReg <= 1'b0;  // Do not update register file.
-		LoadAcc <= 1'b0;  // Do not update ACC
-		SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
-		SelALU  <= JMPZ_IMM;
-        end
-        
-	// Jump to address in register if carry is set
-        JMPC_REG : begin
-		LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
-		IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
-		SelPC   <= 1'b0;   // Load value from register instead of basic increment
-		LoadPC  <= 1'b1;   // Jump, load based on mux
-		LoadReg <= 1'b0;   // Do not update register file.
-		LoadAcc <= 1'b0;   // Do not update ACC 
-		SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
-		SelALU  <= JMPC_REG;
-        end
-           
-	// Jump to address of immediate if carry is set
-        JMPC_IMM : begin
-		LoadIR  <= 1'b1;   // Load next instruction from IMem to IR      	
-		IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
-		SelPC   <= 1'b1;   // Load immediate to jump to
-		LoadPC  <= 1'b1;   // Load immediate value instead of basic increment
-		LoadReg <= 1'b0;   // Do not update register file.
-		LoadAcc <= 1'b0;   // Do not update ACC
-		SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
-		SelALU  <= JMPC_IMM;       
-        end
-        
-	// No operation, empty cycle
-        NOP : begin
+	// Asynchronous active high reset
+	if(reset) begin
+		// Same as No-Op case
 		LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
 		IncPC   <= 1'b1;    // Increment to next instruction only
 		SelPC   <= 1'bx;    // Mux output does not matter for this case
@@ -146,37 +57,207 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 		LoadAcc <= 1'b0;    // Do not update ACC
 		SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
 		SelALU  <= NOP; 
-        end
-        
-	// Stop processor, do not load another instruction
-        HALT : begin
-        LoadIR  <= 1'b0;  // DO NOT LOAD ANOTHER INSTRUCTION
-		IncPC   <= 1'b0;  // Do not update PC
-		SelPC   <= 1'bx;  // Mux output does not matter for this case
-		LoadPC  <= 1'b0;  // Do not load PC from mux wire, PC should not change
-		LoadReg <= 1'b0;  // Do not update anything in register file
-		LoadAcc <= 1'b0;  // Do not update ACC
-		SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
-		SelALU  <= HALT; 
-        end
-        
-	// Unrecognized instruction
-        default : begin
-        LoadIR  <= 1'bx;       	
-		IncPC   <= 1'bx; 
-		SelPC   <= 1'bx;
-		LoadPC  <= 1'bx;
-		LoadReg <= 1'bx;
-		LoadAcc <= 1'bx;
-		SelAcc  <= 2'bxx; 
-		SelALU  <= 4'bxxxx; 
-        end
-        
-        endcase
+	end
+
+	// Else use opcode to determine control bits
+	else begin
+		// Signals vary by opcode
+		case(Opcode)
+			
+		// ALU Related Opcodes
+		ADD, SUB, NOR, SHFR, SHFL : begin
+			LoadIR  <= 1'b1;  // Load next instruction from IMem to IR        	
+			IncPC   <= 1'b1;  // Increment to next instruction only
+			SelPC   <= 1'bx;  // Mux output does not matter for this case
+			LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
+			LoadReg <= 1'b0;  // Do not update register file.
+			LoadAcc <= 1'b1;  // Update value stored in ACC
+			SelAcc  <= 2'b11; // Load output of ALU into ACC
+			SelALU  <= Opcode; 
+			end
+			
+		// Put value from Reg in ACC
+		REG_TO_ACC : begin
+			LoadIR  <= 1'b1;  // Load next instruction from IMem to IR          	
+			IncPC   <= 1'b1;  // Increment to next instruction only
+			SelPC   <= 1'bx;  // Mux output does not matter for this case
+			LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
+			LoadReg <= 1'b0;  // Do not update register file.
+			LoadAcc <= 1'b1;  // Update value stored in ACC
+			SelAcc  <= 2'b01; // SecAcc0 = 1 (B), SelAcc1 = 0 (A)
+			SelALU  <= Opcode;
+			end
+			
+		// Put value from ACC into a Reg
+		ACC_TO_REG : begin
+			LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
+			IncPC   <= 1'b1;  // Increment to next instruction only
+			SelPC   <= 1'bx;  // Mux output does not matter for this case
+			LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
+			LoadReg <= 1'b1;  // Update register value!
+			LoadAcc <= 1'b0;  // Do not update ACC
+			SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
+			SelALU  <= ACC_TO_REG;
+			end
+			
+		// Load immediate into ACC
+		IMM_TO_ACC : begin
+			LoadIR  <= 1'b1;  // Load next instruction from IMem to IR        	
+			IncPC   <= 1'b1;  // Increment to next instruction only
+			SelPC   <= 1'bx;  // Mux output does not matter for this case
+			LoadPC  <= 1'b0;  // Do not load PC from mux wire. Increment only, do not jump
+			LoadReg <= 1'b0;  // Do not update register file.
+			LoadAcc <= 1'b1;  // Update ACC
+			SelAcc  <= 2'b00; // SecAcc0 = 0 (A), SelAcc1 = 0 (A)
+			SelALU  <= IMM_TO_ACC;
+			end      
+			
+		// Jump to address in REG if zero is set
+		JMPZ_REG : begin
+			if(Z == 1'b1) begin
+				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
+				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
+				SelPC   <= 1'b0;   // Load address to jump to from register
+				LoadPC  <= 1'b1;   // Load value from register instead of basic increment
+				LoadReg <= 1'b0;   // Do not update register file.
+				LoadAcc <= 1'b0;   // Do not update ACC
+				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
+				SelALU  <= JMPZ_REG;
+			end
+			else begin 
+				// Same as No-Op case
+				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
+				IncPC   <= 1'b1;    // Increment to next instruction only
+				SelPC   <= 1'bx;    // Mux output does not matter for this case
+				LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
+				LoadReg <= 1'b0;    // Do not update register file.
+				LoadAcc <= 1'b0;    // Do not update ACC
+				SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
+				SelALU  <= NOP; 
+			end
+		end
+		// Jump to address of immediate if zero is set
+		JMPZ_IMM : begin
+			if(Z == 1'b1) begin
+				LoadIR  <= 1'b1;  // Load next instruction from IMem to IR       	
+				IncPC   <= 1'b0;  // Jump instruction, use LoadPC signal to use value from mux
+				SelPC   <= 1'b1;  // Load immediate to jump to
+				LoadPC  <= 1'b1;  // Load immediate value instead of basic increment
+				LoadReg <= 1'b0;  // Do not update register file.
+				LoadAcc <= 1'b0;  // Do not update ACC
+				SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
+				SelALU  <= JMPZ_IMM;
+			end
+			else begin
+				// Same as No-Op case
+				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
+				IncPC   <= 1'b1;    // Increment to next instruction only
+				SelPC   <= 1'bx;    // Mux output does not matter for this case
+				LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
+				LoadReg <= 1'b0;    // Do not update register file.
+				LoadAcc <= 1'b0;    // Do not update ACC
+				SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
+				SelALU  <= NOP; 
+			end
+		end
+			
+		// Jump to address in register if !Z
+		JMPNZ_REG : begin
+			if(Z != 1'b1) begin
+				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR         	
+				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
+				SelPC   <= 1'b0;   // Load value from register instead of basic increment
+				LoadPC  <= 1'b1;   // Jump, load based on mux
+				LoadReg <= 1'b0;   // Do not update register file.
+				LoadAcc <= 1'b0;   // Do not update ACC 
+				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
+				SelALU  <= JMPNZ_REG;
+			end
+			else begin
+				// Same as No-Op case
+				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
+				IncPC   <= 1'b1;    // Increment to next instruction only
+				SelPC   <= 1'bx;    // Mux output does not matter for this case
+				LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
+				LoadReg <= 1'b0;    // Do not update register file.
+				LoadAcc <= 1'b0;    // Do not update ACC
+				SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
+				SelALU  <= NOP; 
+			end
+		end
+			
+		// Jump to address of immediate if !Z
+		JMPNZ_IMM : begin
+			if(Z != 1'b1) begin
+				LoadIR  <= 1'b1;   // Load next instruction from IMem to IR      	
+				IncPC   <= 1'b0;   // Jump instruction, use LoadPC signal to use value from mux
+				SelPC   <= 1'b1;   // Load immediate to jump to
+				LoadPC  <= 1'b1;   // Load immediate value instead of basic increment
+				LoadReg <= 1'b0;   // Do not update register file.
+				LoadAcc <= 1'b0;   // Do not update ACC
+				SelAcc  <= 2'bxx;  // SelAcc only matters if LoadAcc is set
+				SelALU  <= JMPNZ_IMM;   
+			end
+			else begin
+				// Same as No-Op case
+				LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
+				IncPC   <= 1'b1;    // Increment to next instruction only
+				SelPC   <= 1'bx;    // Mux output does not matter for this case
+				LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
+				LoadReg <= 1'b0;    // Do not update register file.
+				LoadAcc <= 1'b0;    // Do not update ACC
+				SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
+				SelALU  <= NOP; 
+			end    
+		end
+			
+		// No operation, empty cycle
+		NOP : begin
+			LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
+			IncPC   <= 1'b1;    // Increment to next instruction only
+			SelPC   <= 1'bx;    // Mux output does not matter for this case
+			LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
+			LoadReg <= 1'b0;    // Do not update register file.
+			LoadAcc <= 1'b0;    // Do not update ACC
+			SelAcc  <= 2'bxx;   // SelAcc only matters if LoadAcc is set
+			SelALU  <= NOP; 
+			end
+			
+		// Stop processor, do not load another instruction
+		HALT : begin
+			LoadIR  <= 1'b0;  // DO NOT LOAD ANOTHER INSTRUCTION
+			IncPC   <= 1'b0;  // Do not update PC
+			SelPC   <= 1'bx;  // Mux output does not matter for this case
+			LoadPC  <= 1'b0;  // Do not load PC from mux wire, PC should not change
+			LoadReg <= 1'b0;  // Do not update anything in register file
+			LoadAcc <= 1'b0;  // Do not update ACC
+			SelAcc  <= 2'bxx; // SelAcc only matters if LoadAcc is set
+			SelALU  <= HALT; 
+			end
+			
+		// Unrecognized instruction
+		default : begin
+			LoadIR  <= 1'bx;       	
+			IncPC   <= 1'bx; 
+			SelPC   <= 1'bx;
+			LoadPC  <= 1'bx;
+			LoadReg <= 1'bx;
+			LoadAcc <= 1'bx;
+			SelAcc  <= 2'bxx; 
+			SelALU  <= 4'bxxxx; 
+			end
+			
+		endcase
+		
+		end // End of else
+
+	// Save opcode as previos, use small delay to preserve prev
+	// during evaluation
+    	#5 previous_opcode = Opcode;
     
-    end // End of always
-    
-    
-    
+	
+	end // End of always
+
+	
     
 endmodule
