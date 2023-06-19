@@ -16,10 +16,10 @@
 **
 **    Rev         Author              		Date
 ** -----------------------------------------------------------------------------
-**    1.1         M. Peña           		17-June-2023
+**    1.1         M. Peï¿½a           		17-June-2023
 **                Input/memory control
 **
-**    1.0         M. Peña           		01-June-2023
+**    1.0         M. Peï¿½a           		01-June-2023
 **                Initial version, no input control or overflow logic
 **
 *******************************************************************************/
@@ -31,15 +31,15 @@
 *******************************************************************************/
 
 `timescale 1ns / 1ps
-module acc_simple (out, in, clock, reset);
 
-// ----- Input Ports -----
-	input clock; 		// Clock. Output is posedge triggered
-	input reset; 		// Clears register value (1 = clear, 0 = hold)
-	input [7 : 0] in;	// Input from ALU
-
-// ----- Output Port -----
-	output [7 : 0] out;	// Output return to ALU
+// Description
+//! A register in which intermediate arithmetic logic unit results are stored.
+module acc_simple (
+	output [7 : 0] out, //! Value stored in the register, to be returned to ALU.
+	input [7 : 0] in, //! Value (from ALU) to increment current register value by.
+	input clock, //! Clock signal (posedge triggered).
+	input reset //! Signal (active high) to clear register value and set value stored back to 0.
+	);
 
 // ----- Accumulator -----
 	reg [7 : 0] accumulator = 8'b00000000;	// Temporary storage for accumulator output
@@ -63,16 +63,15 @@ endmodule
 ** v1.1
 **
 *******************************************************************************/
-module acc (out, in, update, clock, reset);
-
-// ----- Input Ports -----
-	input clock; 		// Clock. Output is posedge triggered
-	input reset; 		// Clears register value (1 = clear, 0 = hold)
-	input [7 : 0] in;	// Input from ALU
-	input update;		// update control. 1 = update accumulator value; 0 = do not update
-
-// ----- Output Port -----
-	output [7 : 0] out;	// Output return to ALU
+// Description
+//! 
+module acc (
+	output [7 : 0] out, //! Value stored in the register, to be returned to ALU.
+	input [7 : 0] in, //! Value (from ALU) to increment current register value by.
+	input update, //! Signal (active high) to update the register value by "in"'s value.
+	input clock, //! Clock signal and posedge triggered.
+	input reset //! Signal (active high) to clear register value and set value stored back to 0.
+	);
 
 // ----- Accumulator -----
 	reg [7 : 0] accumulator = 8'b00000000;	// Temporary storage for accumulator output

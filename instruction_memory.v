@@ -2,13 +2,10 @@
 // Description
 //! Instruction memory to execute a program based on a program couunter
 //! Assumption: Program is precompiled
-module instruction_memory(pc_address, out);
-
-    // program counter 
-    input [7:0] pc_address;
-
-    // instruction to send to instruction register 
-    output reg [7:0] out;
+module instruction_memory(
+    input [7:0] pc_address, //! Address of the Instruction
+    output reg [7:0] out //! Instruction value at the address location
+    );
 
     // if a new instruction is sent to the register 
     always @(pc_address) begin

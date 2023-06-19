@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 
-module mcu_8bit(Clk, Reset, currentPC, resetPC);
-	
-	// Input / Output nets of module
-	input Clk;
-	input Reset;
-	input [7:0] resetPC;
-	output [7:0] currentPC;
+// Description
+//! 8-bit Micro-controller Unit
+module mcu_8bit(
+	input Clk, //! Clock signal.
+	input Reset, //! Signal to reset controller (all internal components). 
+	output [7:0] currentPC, //! Program Counter: Address of the program instruction we want to execute.
+	input [7:0] resetPC //! Signal to reset program counter.
+	);
 	
 	/* Internal nets:
 	 * These are all of the connections between different
