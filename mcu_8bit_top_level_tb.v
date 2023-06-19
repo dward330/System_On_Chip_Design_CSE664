@@ -47,8 +47,8 @@ module mcu_8bit_top_level_tb();
     // Declare testbench output variables
     wire [7:0] wire_currentPC;
 
-    // Set period to 10ns
-    always #5 r_Clk =~ r_Clk;
+    // Set period to 40ns
+    always #20 r_Clk =~ r_Clk;
 
 
     // Instantiate unit under test

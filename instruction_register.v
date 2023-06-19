@@ -36,6 +36,7 @@ module instruction_register(
         // send data to instruction registers / immediate
         end
         else if (LoadIR) begin
+            #1
             opcode <= instruction[7:4];
             data_out <= instruction[3:0];
         end

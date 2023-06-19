@@ -81,11 +81,23 @@ module acc (
 // If reset is high then clear output. 
 
 always @(posedge clock or posedge reset)	// at posedge of clock or reset=1
+
 begin
+
+#5 // delay to let ctrl signal propagate / write ALU result to ACC
 	if (reset)				// if reset = 1
 		accumulator <= 0;		// reset accumulator to 0
 	else if (update)
-		accumulator <= accumulator + in; // store value in accumulator if change bit = 1
+	   #10 // Required to write to register after ALU op
+		accumulator <= in; // store value in accumulator if change bit = 1
 end
-	assign out = accumulator; 		// send value back to ALU
+
+
+	assign #3 out = accumulator; 		// send value back to ALU, delay 3 ns to read
+	
+	
 endmodule
+
+
+
+

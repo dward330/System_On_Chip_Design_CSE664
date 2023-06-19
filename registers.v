@@ -29,6 +29,8 @@ reg [register_size-1:0] datatogoout;
 //Only run when we detect a positive clock edge rise or a positive reset edge rise
 always @(posedge clock or posedge reset) begin
 
+#4 // delay for writing to register
+
 	// Reset all register slots back to 0 as well as output value being sent to the outside
 	if (reset==1) begin
 		for (i = 0; i < register_count; i = i+1) begin
@@ -46,7 +48,7 @@ always @(posedge clock or posedge reset) begin
 	datatogoout <= registers[addr];
 end
 
-// Send out the addressed register slot's value
-assign data_out = datatogoout;
+// Send out the addressed register slot's value, delay for ALU ops
+assign #4 data_out = datatogoout;
 
 endmodule

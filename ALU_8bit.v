@@ -31,6 +31,8 @@ parameter [3:0] 	NOP 	= 4'b0000, // No-operation
 		 * The output is a 9 bit reg to account for carry.
 		 * The result is checked every operation to determine zero flag value
 		 */
+		 #5 // delay for ops
+		 
 		case(alu_select)
 
 			// Add both inputs

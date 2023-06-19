@@ -41,9 +41,9 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
     
 	// Asynchronous active high reset
 	if(reset) begin
-		// Same as No-Op case
-		LoadIR  <= 1'b1;    // Load next instruction from IMem to IR  
-		IncPC   <= 1'b1;    // Increment to next instruction only
+		// Same as halt case
+		LoadIR  <= 1'b0;    // Load next instruction from IMem to IR  
+		IncPC   <= 1'b0;    // Increment to next instruction only
 		SelPC   <= 1'bx;    // Mux output does not matter for this case
 		LoadPC  <= 1'b0;    // Do not load PC from mux wire. Increment only, do not jump
 		LoadReg <= 1'b0;    // Do not update register file.
@@ -54,6 +54,7 @@ parameter   ADD         = 4'b0001,      // ACC = REG + ACC
 
 	// Else use opcode to determine control bits
 	else begin
+	#2
 		// Signals vary by opcode
 		case(Opcode)
 			
