@@ -30,13 +30,13 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
 	
 	// 4. Wires around accumulator register
 	wire [7:0] acc_out; 
-	wire acc_in;
+	wire [7:0] acc_in;
 	
 	// 5. MUX2_A0 to MUX2_A1
-	wire a0_to_a1;
+	wire [7:0] a0_to_a1;
 	
 	// 6. MUX2_PC to PC wire
-	wire pc_jump;
+	wire [7:0] pc_jump;
 
 	// 7. IR Reg Wires
 	wire [3:0] ir_data; // maps to both immediate and regAddress
@@ -111,7 +111,7 @@ module mcu_8bit(Clk, Reset, currentPC, resetPC);
         .Clk(Clk),
         .Z(alu_zero_flag),
         .C(alu_carry_out),
-        .CLB(CLB)
+        .reset(Reset)
     );
 
 
