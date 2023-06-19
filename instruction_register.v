@@ -1,7 +1,9 @@
 `timescale 1ns / 1ps
 
 // Description
-// ! Register Module to transfrom instruction into opcode (sent to controller) and data components. 
+//! The part of a CPU's control unit that holds the instruction currently being executed or decoded.
+//! 
+//! This module transforms instruction into opcode (sent to controller) and data components. 
 module instruction_register(
     input clock, //! Clock signal (Positive edge triggered).
     input reset, //! Signal to clear and set opcode and data out back to 0.

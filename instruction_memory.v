@@ -1,6 +1,7 @@
 
 // Description
-//! Instruction memory to execute a program based on a program couunter
+//! Instruction memory to execute a program based on a program counter
+//!
 //! Assumption: Program is precompiled
 module instruction_memory(
     input [7:0] pc_address, //! Address of the Instruction
